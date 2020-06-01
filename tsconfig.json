@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["ES2019", "dom"],
+    "types": ["svelte", "@sapper", "global"],
+    "typeRoots": ["typings"]
+  },
+  "files": ["src/server.ts", "src/client.ts"]
+}

@@ -1,0 +1,27 @@
+.contained {
+  @apply px-3;
+}
+
+@screen md {
+  .contained {
+    @apply px-6;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+.contained-md {
+  @apply px-3;
+}
+
+@screen md {
+  .contained-md {
+    @apply px-6;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
