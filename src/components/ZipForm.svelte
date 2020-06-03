@@ -4,7 +4,7 @@
 
 <div
   style="width: 600px"
-  class="bg-white flex mx-auto rounded-full border border-brown max-h-full {$$props.class || ''}">
+  class="flex mx-auto rounded-full border border-brown max-h-full {$$props.class || ''}">
   <input
     placeholder="enter your 5-digit zip code"
     class="zip-input bg-transparent py-4 px-6 flex-1 text-2xl text-center"
@@ -20,6 +20,6 @@
   @import "../style/shared.css";
 
   .zip-input::placeholder {
-    @apply text-brown-gray;
+    @apply text-brown;
   }
 </style>

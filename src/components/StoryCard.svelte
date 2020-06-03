@@ -1,4 +1,8 @@
 <script>
+  import { fade, fly } from "svelte/transition";
+  import { onDestroy, onMount } from "svelte";
+  import { delay } from "utils/time";
+
   export let style = "";
 
   const profiles = [
@@ -27,7 +31,28 @@
     }
   ];
 
-  let currentProfile = 1;
+  let currentProfile = 0;
+
+  let swapping = false;
+  let swapInterval;
+
+  let animationDuration = 200;
+  let animationDimension = "y";
+
+  onMount(() => {
+    swapInterval = setInterval(async () => {
+      swapping = true;
+
+      await delay(animationDuration - 5);
+
+      currentProfile = (currentProfile + 1) % profiles.length;
+      swapping = false;
+    }, 3000);
+  });
+
+  onDestroy(() => {
+    clearInterval(swapInterval);
+  });
 
   $: profile = profiles[currentProfile];
 
@@ -44,11 +69,23 @@
 </script>
 
 <div {style} class="border-2 border-tan {$$props.class || ''} p-12 items-start">
-  <h2 class="text-4xl font-bold">{profile.name}</h2>
-  {#each fields as field}
-    <p class="text-2xl mt-4">
-      <span class="mr-2">{field.name}:</span>
-      <span class="text-brown-gray">{profile[field.key]}</span>
-    </p>
+  {#if !swapping}
+    <h2
+      in:fly={{ duration: animationDuration, [animationDimension]: -20 }}
+      out:fly={{ duration: animationDuration, [animationDimension]: 20 }}
+      class="text-4xl font-bold">
+      {profile.name}
+    </h2>
+  {/if}
+  {#each fields as field (field.name)}
+    {#if !swapping}
+      <p
+        class="text-2xl mt-4"
+        in:fly={{ duration: animationDuration, [animationDimension]: -20 }}
+        out:fly={{ duration: animationDuration, [animationDimension]: 20 }}>
+        <span class="mr-4">{field.name}:</span>
+        <span class="text-brown-gray inline-block">{profile[field.key]}</span>
+      </p>
+    {/if}
   {/each}
 </div>

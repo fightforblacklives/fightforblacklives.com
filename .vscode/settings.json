@@ -1,3 +1,6 @@
 {
-  "svelte.plugin.css.enable": false
+  "svelte.plugin.css.enable": false,
+  "files.exclude": {
+    "/__sapper__/export": true
+  }
 }

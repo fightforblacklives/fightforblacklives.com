@@ -1,23 +1,28 @@
-<div class="flex flex-col contained">
-  <div class="mx-auto my-16 ">
+<script>
+  import scrollLink from "mixins/scrollLink";
+</script>
+
+<div
+  style="border-bottom-width: 1.5px; border-style: solid;"
+  class="flex contained items-center py-12 border-brown-gray">
+  <div>
     <a href="/" class="mx-auto">
       <img
-        style="width: 350px; max-width: 100%;"
+        style="width: 250px; max-width: 100%;"
         alt="Fight For Black Lives Logo"
         src="/ffbl-black.png" />
     </a>
-
-    <p class="text-center mt-6 text-brown">
-      At magnum periculum adiit in quo minus id
-    </p>
   </div>
 
   <nav
-    class="flex justify-between border-t border-brown-gray self-stretch px-16
-    pt-2 text-xl text-brown font-medium">
-    <a class="nav-link" href="/What can I do?">What can I do?</a>
-    <a class="nav-link" href="/partners">Why should I do it?</a>
-    <a class="nav-link" href="/volunteer">How else can I help?</a>
+    class="flex flex-1 justify-end pl-32 pt-2 text-xl text-brown font-medium">
+    <a use:scrollLink class="nav-link" href="#what-can-i-do">What can I do?</a>
+    <a use:scrollLink class="nav-link" href="#why-should-i-do-it">
+      Why should I do it?
+    </a>
+    <a use:scrollLink class="nav-link" href="#how-else-can-i-help">
+      How else can I help?
+    </a>
   </nav>
 </div>
 
@@ -25,6 +30,6 @@
   @import "../style/shared.css";
 
   .nav-link {
-    @apply text-brown;
+    @apply text-brown pl-16;
   }
 </style>

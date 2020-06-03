@@ -3,6 +3,8 @@
   import Hero from "components/Hero";
   import ZipForm from "components/ZipForm";
   import StoryCard from "components/StoryCard";
+  import StoryCard2 from "components/StoryCard2";
+  import scrollLink from "mixins/scrollLink";
 
   let zipCode = "";
   let pristine = true;
@@ -17,15 +19,16 @@
   };
 </script>
 
-<div class="flex flex-col flex-1 self-stretch">
+<div id="enter-your-zip-code" class="flex flex-col flex-1 self-stretch">
   <Hero />
-  <ZipForm />
+  <ZipForm class="mt-2 mb-32" />
 
-  <div class="contained my-24">
-    <h1 class="text-3xl font-semibold text-brown-gray mb-10">What can I do?</h1>
+  <div class="contained mb-32">
 
-    <div class="flex items-center">
+    <div class="flex items-start">
       <div class="text-section flex-1 text-xl pr-6">
+        <h1 id="what-can-i-do" class="section-header">What can I do?</h1>
+
         <p>
           Demand change by way of legislation from every level of government.
           These elected officials serve YOU.
@@ -42,6 +45,14 @@
           of topics that all support ending police violence against black and
           brown people in America.
         </p>
+
+        <a
+          use:scrollLink
+          href="#enter-your-zip-code"
+          class="text-brown-white inline-block bg-brown py-4 px-8 rounded-full
+          text-xl mt-16">
+          Enter your zip code
+        </a>
       </div>
 
       <img
@@ -50,19 +61,15 @@
         src="/mock_tweet.png" />
     </div>
 
-    <button
-      class="text-brown-white bg-off-black py-4 px-8 rounded-full text-xl mt-8">
-      Enter your zip code
-    </button>
   </div>
 
-  <div class="contained mb-24">
-    <h1 class="text-3xl font-semibold text-brown-gray mb-10">
-      Why should I do it?
-    </h1>
-
-    <div class="flex b-24 items-start">
+  <div class="contained mb-32">
+    <div class="flex b-24 items-center">
       <div class="text-section flex-1 pr-6">
+        <h1 id="why-should-i-do-it" class="section-header">
+          Why should I do it?
+        </h1>
+
         <p>
           Since January 1st 2015,
           <b>1262</b>
@@ -100,14 +107,14 @@
         </p>
       </div>
 
-      <StoryCard style="flex: 0 0 450px;">test</StoryCard>
+      <StoryCard2 style="flex: 0 0 450px;" />
     </div>
   </div>
 
-  <ZipForm />
+  <ZipForm class="my-8" />
 
-  <div class="contained my-24">
-    <h1 class="text-3xl font-semibold text-brown-gray mb-10">
+  <div class="contained my-32">
+    <h1 id="how-else-can-i-help" class="section-header">
       How else can I help?
     </h1>
 
@@ -170,7 +177,7 @@
 
   .hero-container {
     @apply font-semibold;
-    font-size: 45px;
+    font-size: 50px;
   }
 
   .text-section {
@@ -200,5 +207,9 @@
 
   ul.list > li > span {
     display: inline-block;
+  }
+
+  .section-header {
+    @apply text-4xl font-semibold text-brown-gray mb-6;
   }
 </style>
