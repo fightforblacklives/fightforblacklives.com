@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "npm run dev:tailwind && sapper dev",
+    "publish": "./deploy.sh",
     "build": "npm run build:tailwind && NODE_ENV=production sapper build",
     "export": "npm run build:tailwind && sapper export --basepath fightforblacklives.com",
     "start": "node __sapper__/build",
