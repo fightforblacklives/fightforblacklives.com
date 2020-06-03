@@ -1,5 +1,6 @@
 <script>
   import scrollLink from "mixins/scrollLink";
+  import { staticPath } from "config/static";
 </script>
 
 <div
@@ -10,7 +11,7 @@
       <img
         style="width: 250px; max-width: 100%;"
         alt="Fight For Black Lives Logo"
-        src="/ffbl-black.png" />
+        src="{staticPath}/ffbl-black.png" />
     </a>
   </div>
 

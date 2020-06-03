@@ -5,6 +5,7 @@
   import StoryCard from "components/StoryCard";
   import StoryCard2 from "components/StoryCard2";
   import scrollLink from "mixins/scrollLink";
+  import { staticPath } from "config/static";
 
   let zipCode = "";
   let pristine = true;
@@ -58,7 +59,7 @@
       <img
         class="flex-1"
         alt="Tweet saying {`"Find reliable federal tracking and reporting of all incedents involving the use of deadly force by law enforcement, whether lethal or not. Do something!"`}"
-        src="/mock_tweet.png" />
+        src="{staticPath}/mock_tweet.png" />
     </div>
 
   </div>
