@@ -1,6 +1,5 @@
 import * as sapper from "@sapper/server";
 import compression from "compression";
-import "envkey";
 import polka from "polka";
 import sirv from "sirv";
 

@@ -15,7 +15,13 @@ module.exports = {
 
       screens: {},
 
-      colors: {},
+      colors: {
+        "brown-white": "#FFFBFF",
+        "brown-gray": "#94837B",
+        brown: "#331E0F",
+        "off-black": "#131512",
+        tan: "#F2DBC0",
+      },
     },
   },
   variants: {},
