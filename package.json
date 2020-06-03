@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run dev:tailwind && sapper dev",
     "build": "npm run build:tailwind && NODE_ENV=production sapper build",
-    "export": "npm run build:tailwind && NODE_ENV=production sapper export",
+    "export": "npm run build:tailwind && NODE_ENV=production sapper export --basepath fightforblacklives.com",
     "start": "node __sapper__/build",
     "dev:tailwind": "postcss src/tailwind.css -o static/index.css",
     "build:tailwind": "NODE_ENV=production postcss src/tailwind.css -o static/index.css",
