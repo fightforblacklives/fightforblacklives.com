@@ -57,8 +57,8 @@
       </div>
 
       <img
-        class="flex-1"
-        alt="Tweet saying {`"Find reliable federal tracking and reporting of all incedents involving the use of deadly force by law enforcement, whether lethal or not. Do something!"`}"
+        class="flex-1 w-full h-full min-w-0"
+        alt="Tweet sayink {`"Find reliable federal tracking and reporting of all incedents involving the use of deadly force by law enforcement, whether lethal or not. Do something!"`}"
         src="{staticPath}/mock_tweet.png" />
     </div>
 
