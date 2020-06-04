@@ -24,7 +24,8 @@
     getZipCode();
   };
 
-  let zipCode = window.location.hash.slice(1, 6);
+  let zipCode = process.browser ? window.location.hash.slice(1, 6) : null;
+
   let tweets = [
     {
       id: "test2",
