@@ -1,7 +1,7 @@
 <script>
   import { getZipCodeBundle, getDataByAddress } from "utils/api";
   import { onMount } from "svelte";
-
+  import { staticPath } from "config/static";
   import MessagingDropdown from "components/MessagingDropdown";
   import Icon from "components/Icon";
   import {
@@ -19,7 +19,7 @@
     window.history.pushState(
       {},
       `Results for ${zipCode}`,
-      `/your-reps#${zipCode}`
+      `${staticPath}/your-reps#${zipCode}`
     );
     getZipCode();
   };

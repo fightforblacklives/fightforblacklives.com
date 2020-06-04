@@ -1,9 +1,11 @@
 <script>
+  import { staticPath } from "config/static";
+
   let zipCode;
   export let width = 600;
 
   const searchZip = () => {
-    window.location.href = `/your-reps#${zipCode}`;
+    window.location.href = `${staticPath}/your-reps#${zipCode}`;
   };
 </script>
 

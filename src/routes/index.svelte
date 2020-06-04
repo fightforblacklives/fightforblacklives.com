@@ -161,7 +161,7 @@
       <img
         alt="Color of Change Logo"
         class="w-48"
-        src="/color_of_change_logo.png" />
+        src="{staticPath}/color_of_change_logo.png" />
 
       <p class="self-stretch text-center my-8 mx-auto">
         Color Of Change is the nation’s largest online racial justice
