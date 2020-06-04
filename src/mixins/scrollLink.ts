@@ -10,7 +10,7 @@ export default (el) => {
 
     const scrollPosition = elRect.y - bodyRect.y;
 
-    window.scroll({ top: scrollPosition - 50, behavior: "smooth" });
+    window.scroll({ top: scrollPosition - 100, behavior: "smooth" });
   };
 
   el.addEventListener("click", handleClick);
