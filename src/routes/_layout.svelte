@@ -6,7 +6,9 @@
 </script>
 
 <div class="min-h-screen flex flex-col">
-  <div class="bg-c-bg-complement">
+  <div
+    class:hidden={process.env.NODE_ENV !== 'production'}
+    class="bg-c-bg-complement">
     <div class="contained text-c-text-1-complement py-4">
       This site is under construction. For more information, you can contact us
       at

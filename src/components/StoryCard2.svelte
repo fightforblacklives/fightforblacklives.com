@@ -88,7 +88,8 @@
 
 <div
   {style}
-  class="border-2 border-c-border-3 {$$props.class || ''} p-12 items-start">
+  class="border-2 border-c-border-3 {$$props.class || ''} p-8 lg:p-12
+  items-start">
   <h2 style="height: 1.4em" class="text-4xl font-bold">
     {#if swapping !== 'name'}
       <span

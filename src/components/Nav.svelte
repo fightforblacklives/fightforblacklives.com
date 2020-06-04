@@ -3,18 +3,16 @@
   import { staticPath } from "config/static";
 </script>
 
-<div class="flex contained items-center py-12">
-  <div class="flex flex-grow-1 md:flex-grow-0">
-    <a href="/" class="mx-auto">
-      <img
-        class="logo mx-auto"
-        style=""
-        alt="Fight For Black Lives Logo"
-        src="{staticPath}/ffbl-black.png" />
+<div class="contained items-center py-12 hidden md:flex">
+  <div class="flex flex-grow md:flex-grow-0">
+    <a
+      href="/"
+      class="mx-auto inline-block font-semibold text-4xl border-c-border-1">
+      Fight For Black Lives.
     </a>
   </div>
 
-  <nav class="flex-1 justify-end ml-auto pt-2 font-medium hidden md:flex">
+  <nav class="flex-1 justify-end ml-auto pt-2 font-semibold hidden md:flex">
     <a use:scrollLink class="nav-link" href="#what-can-i-do">What can I do?</a>
     <a use:scrollLink class="nav-link" href="#why-should-i-do-it">
       Why should I do it?
@@ -33,7 +31,7 @@
     @apply text-lg;
 
     @screen lg {
-      @apply pl-16 text-xl;
+      @apply pl-16 text-xl text-c-header-1;
     }
   }
 

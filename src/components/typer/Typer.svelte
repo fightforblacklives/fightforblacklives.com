@@ -5,9 +5,15 @@
 
   const texts = [];
   let started = false;
+  let done = false;
 
   setContext(typer, {
     register(start) {
+      if (done) {
+        start(false);
+        return;
+      }
+
       texts.push(start);
 
       if (!started) {
@@ -18,9 +24,11 @@
   });
 
   const type = async () => {
+    console.log(texts);
     for (const text of texts) {
-      await text();
+      await text(true);
     }
+    done = true;
   };
 </script>
 

@@ -13,15 +13,22 @@
 
   const typeDelay = async () => {
     if (mounted === false) {
-      throw "done";
+      return "done";
     }
 
     await delay(typeDelayDuration + Math.floor(Math.random() * 30));
   };
 
-  const type = async () => {
+  const type = async showAnimation => {
+    if (!showAnimation) {
+      slice = false;
+      return;
+    }
+
     for (slice = 0; slice < text.length; slice++) {
-      await typeDelay();
+      if ((await typeDelay()) === "done") {
+        return;
+      }
     }
   };
 
@@ -36,6 +43,8 @@
 </script>
 
 <span class="relative inline-block">
-  <span class="absolute inline-block">{text.slice(0, slice)}</span>
-  <span class="opacity-0">{text}</span>
+  {#if slice !== false}
+    <span class="absolute inline-block">{text.slice(0, slice)}</span>
+  {/if}
+  <span class:opacity-0={slice !== false}>{text}</span>
 </span>

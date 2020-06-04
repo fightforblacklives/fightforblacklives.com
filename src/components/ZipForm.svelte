@@ -11,20 +11,23 @@
   style="width: {width}px; {$$props.style || ''}"
   class="flex rounded-full border border-c-border-2 max-h-full {$$props.class || ''}">
   <input
-    maxlength="5"
+    placeholder="enter your zip code"
+    type="number"
     on:keydown={e => {
       if (e.key === 'Enter') {
         searchZip();
       }
     }}
-    placeholder="enter your 5-digit zip code"
-    class="zip-input bg-transparent py-4 px-6 flex-1 text-2xl text-left"
+    pattern="\d*"
+    maxlength="5"
+    class="zip-input bg-transparent py-4 px-6 flex-1 text-xl lg:text-2xl
+    text-left"
     bind:value={zipCode} />
 
   <button
     on:click={searchZip}
     class="bg-c-button-primary px-12 text-c-text-1-complement m-1 rounded-full
-    self-stretch text-xl">
+    self-stretch text-lg">
     Fight!
   </button>
 </div>
