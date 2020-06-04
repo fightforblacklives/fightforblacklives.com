@@ -5,7 +5,7 @@
   export let length;
   export let multiplier;
 
-  const onScroll = e => {
+  const onScroll = () => {
     if (el) {
       const rect = el.getBoundingClientRect();
       const nyPixels = Math.min(
@@ -19,6 +19,12 @@
       }
     }
   };
+
+  $: {
+    if (el) {
+      onScroll();
+    }
+  }
 </script>
 
 <svelte:window on:scroll={onScroll} />

@@ -14,13 +14,12 @@
   class="flex rounded-full border border-c-border-2 max-h-full {$$props.class || ''}">
   <input
     placeholder="enter your zip code"
-    type="number"
     on:keydown={e => {
       if (e.key === 'Enter') {
         searchZip();
       }
     }}
-    pattern="\d*"
+    pattern={'\\d*'}
     maxlength="5"
     class="zip-input bg-transparent py-4 px-6 flex-1 text-xl lg:text-2xl
     text-left"

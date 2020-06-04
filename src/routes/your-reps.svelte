@@ -78,6 +78,10 @@
   let selectedPerson;
   let dropdownSize = 500;
 
+  const getParty = party => {
+    return party.includes("Democrat") ? "D" : "R";
+  };
+
   onMount(() => {
     getZipCode();
   });
@@ -89,6 +93,7 @@
     <div class="flex flex-col mt-16 mb-24">
       <div class="flex contained">
         <input
+          pattern={'\\d*'}
           maxlength="5"
           on:keydown={e => {
             if (e.key === 'Enter') {
@@ -120,12 +125,12 @@
             <div class="flex flex-1 items-center justify-center">
               {#if person.image}
                 <img
-                  class="w-32 h-32 object-cover rounded-full mx-auto"
+                  class="w-40 h-40 object-cover rounded-full mx-auto"
                   alt="Portrait of {person.name}"
                   src={person.image} />
               {:else}
                 <div
-                  class="w-32 h-32 border-2 border-c-border-3 flex flex-col
+                  class="w-40 h-40 border-2 border-c-border-3 flex flex-col
                   items-center justify-center rounded-full mx-auto">
                   <Icon icon={fasUser} class="text-5xl text-c-header-1" />
                 </div>
@@ -133,23 +138,23 @@
 
             </div>
 
-            <div class="p-4">
-              <h4 class="font-semibold">{person.title}</h4>
-              <h3>{person.name}</h3>
-              <div class="flex flex-row items-center">
-                <h5>{person.party}</h5>
-                <div class="flex flex-row ml-auto">
-                  {#if person.twitter}
-                    <Icon class="px-1" icon={twitter} />
-                  {/if}
-                  {#if person.phone}
-                    <Icon class="px-1" icon={fasPhone} />
-                  {/if}
-                  {#if person.email}
-                    <Icon class="px-1" icon={fasEnvelope} />
-                  {/if}
+            <div class="p-4 flex flex-col text-center items-center">
+              <h4 class="font-semibold">
+                {person.name}
+                <span class="font-normal">({getParty(person.party)})</span>
+              </h4>
+              <h3 class="text-sm">{person.title}</h3>
 
-                </div>
+              <div class="flex mt-3">
+                {#if person.twitter}
+                  <Icon class="px-3" icon={twitter} />
+                {/if}
+                {#if person.phone}
+                  <Icon class="px-3" icon={fasPhone} />
+                {/if}
+                {#if person.email}
+                  <Icon class="px-3" icon={fasEnvelope} />
+                {/if}
               </div>
             </div>
 
