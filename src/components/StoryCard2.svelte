@@ -86,7 +86,9 @@
   ];
 </script>
 
-<div {style} class="border-2 border-tan {$$props.class || ''} p-12 items-start">
+<div
+  {style}
+  class="border-2 border-c-border-3 {$$props.class || ''} p-12 items-start">
   <h2 style="height: 1.4em" class="text-4xl font-bold">
     {#if swapping !== 'name'}
       <span
@@ -105,7 +107,7 @@
         <span
           in:fly={{ duration: animationDuration, [animationDimension]: 15 }}
           out:fly={{ duration: animationDuration, [animationDimension]: -15 }}
-          class="text-brown-gray inline-block">
+          class="text-c-header-1 inline-block">
           {getField(swapped, swapping, profile, nextProfile, field.key)}
         </span>
       {/if}

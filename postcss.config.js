@@ -13,6 +13,7 @@ module.exports = {
   plugins: [
     require("postcss-import"),
     tailwindcss("./tailwind.js"),
+    require("postcss-nested"),
     require("autoprefixer"),
 
     // only needed if you want to purge

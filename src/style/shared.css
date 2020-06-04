@@ -1,10 +1,15 @@
-
 .contained {
-  @apply px-6;
   max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+}
+
+@media only screen and (max-width: 1304px) {
+  .contained {
+    @apply mx-6;
+    width: calc(100% - 48px);
+  }
 }
 
 .contained-md {

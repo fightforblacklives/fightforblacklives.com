@@ -6,8 +6,8 @@
 </script>
 
 <div class="min-h-screen flex flex-col">
-  <div class="bg-off-black">
-    <div class="contained text-brown-white p-4">
+  <div class="bg-c-bg-complement">
+    <div class="contained text-c-text-1-complement py-4">
       This site is under construction. For more information, you can contact us
       at
       <a class="underline" href="mailto:contact@fightforblacklives.com">
@@ -29,6 +29,6 @@
   @import "../style/shared.css";
 
   :global(body) {
-    @apply bg-brown-white text-brown;
+    @apply bg-c-bg-primary text-c-text-1;
   }
 </style>

@@ -3,20 +3,18 @@
   import { staticPath } from "config/static";
 </script>
 
-<div
-  style="border-bottom-width: 1.5px; border-style: solid;"
-  class="flex contained items-center py-12 border-brown-gray">
-  <div>
+<div class="flex contained items-center py-12">
+  <div class="flex flex-grow-1 md:flex-grow-0">
     <a href="/" class="mx-auto">
       <img
-        style="width: 250px; max-width: 100%;"
+        class="logo mx-auto"
+        style=""
         alt="Fight For Black Lives Logo"
         src="{staticPath}/ffbl-black.png" />
     </a>
   </div>
 
-  <nav
-    class="flex flex-1 justify-end pl-32 pt-2 text-xl text-brown font-medium">
+  <nav class="flex-1 justify-end ml-auto pt-2 font-medium hidden md:flex">
     <a use:scrollLink class="nav-link" href="#what-can-i-do">What can I do?</a>
     <a use:scrollLink class="nav-link" href="#why-should-i-do-it">
       Why should I do it?
@@ -31,6 +29,20 @@
   @import "../style/shared.css";
 
   .nav-link {
-    @apply text-brown pl-16;
+    @apply pl-4;
+    @apply text-lg;
+
+    @screen lg {
+      @apply pl-16 text-xl;
+    }
+  }
+
+  .logo {
+    width: 200px;
+    max-width: 100%;
+
+    @screen lg {
+      width: 250px;
+    }
   }
 </style>

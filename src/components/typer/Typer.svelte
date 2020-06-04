@@ -10,8 +10,6 @@
     register(start) {
       texts.push(start);
 
-      console.log("test");
-
       if (!started) {
         started = true;
         type();

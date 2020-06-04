@@ -1,3 +1,59 @@
 body {
   font-family: stratos;
 }
+
+input:active,
+input:focus {
+  outline: none;
+}
+
+:root {
+  --color-brownWhite: #fffdfb;
+  --color-brownGray: #94837b;
+  --color-brown: #331e0f;
+  --color-offBlack: #131512;
+  --color-tan: #f2dbc0;
+  --color-twitter-light-gray: #e6ecf0;
+  --color-twitter-black: #15171a;
+  --color-twitter-dark-gray: #647787;
+  --color-twitter-blue: #1da1f2;
+
+  --c-button-primary: var(--color-brown);
+  --c-border-1: var(--color-brown);
+  --c-border-2: var(--color-brownGray);
+  --c-border-3: var(--color-tan);
+  --c-bg-primary: var(--color-brownWhite);
+  --c-bg-complement: var(--color-offBlack);
+  --c-header-1: var(--color-brownGray);
+  --c-text-1: var(--color-brown);
+  --c-header-1-complement: var(--color-brownWhite);
+  --c-text-1-complement: var(--color-brownWhite);
+
+  --c-border-twitter: var(--color-twitter-light-gray);
+  --c-text-twitter: var(--color-twitter-black);
+  --c-header-twitter: var(--color-twitter-dark-gray);
+  --c-button-twitter: var(--color-twitter-blue);
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-babyPowder: #FBFEF9;
+    --color-gunMetal: #292F36;
+    --color-paleSilver: #D5C7BC;
+    --color-offBlack: #080705;
+    --color-blackBean: #440D0F;
+    
+    --c-button-primary: var(--color-paleSilver);
+    --c-border-1: var(--color-babyPowder);
+    --c-border-2: var(--color-babyPowder);
+    --c-border-3: var(--color-paleSilver);
+    --c-bg-primary: var(--color-offBlack);
+    --c-bg-complement: var(--color-babyPowder);
+    --c-header-1: var(--color-paleSilver);
+    --c-text-1: var(--color-babyPowder);
+    --c-header-1-complement: var(--color-paleSilver);
+    --c-text-1-complement: var(--color-offBlack);
+  }
+}
+*/

@@ -1,3 +1,11 @@
+const makeColors = (colors) => {
+  return Object.fromEntries(
+    colors.map((value) => {
+      return [value, `var(--${value})`];
+    })
+  );
+};
+
 module.exports = {
   theme: {
     fontFamily: {
@@ -11,17 +19,28 @@ module.exports = {
         xxl: "1.7rem",
       },
 
-      borderRadius: {},
+      borderRadius: {
+        lg: "16px",
+      },
 
       screens: {},
 
-      colors: {
-        "brown-white": "#FFFBFF",
-        "brown-gray": "#94837B",
-        brown: "#331E0F",
-        "off-black": "#131512",
-        tan: "#F2DBC0",
-      },
+      colors: makeColors([
+        "c-button-primary",
+        "c-border-1",
+        "c-border-2",
+        "c-border-3",
+        "c-bg-primary",
+        "c-bg-complement",
+        "c-header-1",
+        "c-text-1",
+        "c-header-1-complement",
+        "c-text-1-complement",
+        "c-border-twitter",
+        "c-text-twitter",
+        "c-header-twitter",
+        "c-button-twitter",
+      ]),
     },
   },
   variants: {},

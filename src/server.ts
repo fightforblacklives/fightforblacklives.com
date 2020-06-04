@@ -8,16 +8,14 @@ const dev = NODE_ENV === "development";
 
 const app = polka() // You can also use Express
   .use(
-    "/fightforblacklives.com",
+    process.env.NODE_ENV === "development" ? "/" : "/fightforblacklives.com",
     compression({ threshold: 0 }),
     sirv("static", { dev }),
     sapper.middleware()
   );
 
-if (dev) {
-  app.listen(PORT, (err) => {
-    if (err) console.log("error", err);
-  });
-}
+app.listen(PORT, (err) => {
+  if (err) console.log("error", err);
+});
 
 export default app;

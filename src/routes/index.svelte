@@ -6,6 +6,7 @@
   import StoryCard2 from "components/StoryCard2";
   import scrollLink from "mixins/scrollLink";
   import { staticPath } from "config/static";
+  import ScrollOver from "components/ScrollOver";
 
   let zipCode = "";
   let pristine = true;
@@ -18,15 +19,56 @@
       pristine = false;
     }
   };
+
+  let zipContainerWidth;
+  let zipFormWidth = 600;
+  let basezipFormWidth = zipFormWidth;
+  let zipScrollEffectLength = 200;
+  let zipFormScaleDown = 0.2;
+
+  const zipFormScrollLocation = (zipContainerWidth, y) => {
+    const scale = 1 - zipFormScaleDown * y;
+    const zipFormWidth = basezipFormWidth * scale;
+    const startX = zipContainerWidth / 2 - zipFormWidth / 2;
+    const endX = zipContainerWidth - zipFormWidth;
+
+    return startX + (endX - startX) * y;
+  };
 </script>
 
 <div id="enter-your-zip-code" class="flex flex-col flex-1 self-stretch">
+  <hr style="height: 1.5px" class="bg-c-border-2 contained" />
+
   <Hero />
-  <ZipForm class="mt-2 mb-32" />
+
+  <ScrollOver
+    offsetStart={-180}
+    length={zipScrollEffectLength}
+    multiplier={1}
+    let:y>
+    <ZipForm
+      width={zipFormWidth}
+      class="mt-2 {y > 0 ? 'invisible' : ''} mb-32 mx-auto" />
+
+    {#if y > 0}
+      <div
+        style="top: {Math.max(zipScrollEffectLength - y * zipScrollEffectLength - 20, 0)}px;
+        border-bottom-color: rgba(148, 131, 123, {y * 0.4});"
+        class="fixed border-b overflow-visible w-full sticky-nav moz-sticky-nav">
+        <div bind:offsetWidth={zipContainerWidth} class="contained">
+          <ZipForm
+            width={zipFormWidth}
+            style="left: {zipFormScrollLocation(zipContainerWidth, y)}px;
+            transform-origin: 0 50%; transform: scale({1 - zipFormScaleDown * y});"
+            class="mt-2 relative mx-0" />
+        </div>
+      </div>
+    {/if}
+  </ScrollOver>
 
   <div class="contained mb-32">
 
-    <div class="flex items-start">
+    <div class="flex flex-col items-start lg:flex-row">
       <div class="text-section flex-1 text-xl pr-6">
         <h1 id="what-can-i-do" class="section-header">What can I do?</h1>
 
@@ -46,26 +88,21 @@
           of topics that all support ending police violence against black and
           brown people in America.
         </p>
-
-        <a
-          use:scrollLink
-          href="#enter-your-zip-code"
-          class="text-brown-white inline-block bg-brown py-4 px-8 rounded-full
-          text-xl mt-16">
-          Enter your zip code
-        </a>
       </div>
 
-      <img
-        class="flex-1 w-full h-full min-w-0"
-        alt="Tweet sayink {`"Find reliable federal tracking and reporting of all incedents involving the use of deadly force by law enforcement, whether lethal or not. Do something!"`}"
-        src="{staticPath}/mock_tweet.png" />
+      <div class="flex-1 mt-8 lg:mt-0 p-8 lg:py-0 lg:pr-0">
+        <img
+          style="border-radius: 1.3%;"
+          class="flex-1 w-full h-full min-w-0 shadow-lg"
+          alt="Tweet sayink {`"Find reliable federal tracking and reporting of all incedents involving the use of deadly force by law enforcement, whether lethal or not. Do something!"`}"
+          src="{staticPath}/mock_tweet.png" />
+      </div>
     </div>
 
   </div>
 
   <div class="contained mb-32">
-    <div class="flex b-24 items-center">
+    <div class="flex b-24 items-center flex-col lg:flex-row">
       <div class="text-section flex-1 pr-6">
         <h1 id="why-should-i-do-it" class="section-header">
           Why should I do it?
@@ -108,13 +145,11 @@
         </p>
       </div>
 
-      <StoryCard2 style="flex: 0 0 450px;" />
+      <StoryCard2 class="mt-16 lg:mt-0" style="flex: 0 0 450px;" />
     </div>
   </div>
 
-  <ZipForm class="my-8" />
-
-  <div class="contained my-32">
+  <div class="contained mb-32">
     <h1 id="how-else-can-i-help" class="section-header">
       How else can I help?
     </h1>
@@ -122,9 +157,9 @@
     <div class="flex b-24 items-start">
       <div class="text-section flex-1 text-2xl pr-6">
         <p>
-          You can’t donate to us (we’ll always be free), but you can donate to
-          our short list of organizations working to fight systematic injustice
-          for Black people in America.
+          We're just a small independent group of designers and engineers, but
+          you can donate to these organizations working to fight systematic
+          injustice for Black people in America.
         </p>
 
         <p class="mb-6">These organizations focus on the following:</p>
@@ -164,13 +199,11 @@
   </div>
 
   <div class="contained hero-container mb-24">
-    <p class="text-brown-gray">Still scrolling?</p>
-    <p class="text-brown-gray">Enter your zip code.</p>
-    <p class="text-brown-gray">Contact your representatives.</p>
+    <p class="text-c-header-1">Still scrolling?</p>
+    <p class="text-c-header-1">Enter your zip code.</p>
+    <p class="text-c-header-1">Contact your representatives.</p>
     <p>Fight For Black Lives.</p>
   </div>
-
-  <ZipForm class="mb-24" />
 </div>
 
 <style>
@@ -211,6 +244,11 @@
   }
 
   .section-header {
-    @apply text-4xl font-semibold text-brown-gray mb-6;
+    @apply text-4xl font-semibold text-c-header-1 mb-6;
+  }
+
+  .sticky-nav {
+    @apply border-c-border-2 border-b bg-c-bg-primary;
+    backdrop-filter: blur(10px);
   }
 </style>

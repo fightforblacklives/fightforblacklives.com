@@ -27,8 +27,6 @@
 
   onMount(() => {
     mounted = true;
-
-    console.log("ran");
     api.register(type);
   });
 

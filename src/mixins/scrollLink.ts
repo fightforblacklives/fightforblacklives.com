@@ -17,7 +17,7 @@ export default (el) => {
 
   return {
     destroy() {
-      el.removeEventLister("click", handleClick);
+      el.removeEventListener("click", handleClick);
     },
   };
 };
