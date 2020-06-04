@@ -84,9 +84,9 @@
         </p>
 
         <p>
-          We provide canned messages you can tweet, email or write on a number
-          of topics that all support ending police violence against black and
-          brown people in America.
+          We provide canned messages you can tweet on a number of topics that
+          all support ending police violence against black and brown people in
+          America.
         </p>
       </div>
 

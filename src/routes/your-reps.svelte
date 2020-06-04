@@ -1,10 +1,30 @@
 <script>
-  import { getZipCodeBundle } from "utils/api";
+  import { getZipCodeBundle, getDataByAddress } from "utils/api";
   import { onMount } from "svelte";
+
   import MessagingDropdown from "components/MessagingDropdown";
+  import Icon from "components/Icon";
+  import {
+    twitter,
+    fasEnvelope,
+    fasPhone,
+    facebook,
+    fasUser
+  } from "config/icons.ts";
+  const getZipCode = async () => {
+    zipCodeBundle = await getDataByAddress(zipCode);
+  };
+
+  const loadNewZip = () => {
+    window.history.pushState(
+      {},
+      `Results for ${zipCode}`,
+      `/your-reps#${zipCode}`
+    );
+    getZipCode();
+  };
 
   let zipCode = window.location.hash.slice(1, 6);
-
   let tweets = [
     {
       id: "test2",
@@ -16,7 +36,7 @@
         "Mental Health",
         "Broken Windows Policing"
       ],
-      text: "This is my text. This is not long. #kkkkkgggg"
+      text: "This is my text. This is not long."
     },
 
     {
@@ -52,95 +72,96 @@
         "This tweet is longer and more interisting with more #hashtags and squiggles."
     }
   ];
-  let zipCodeBundle = {
-    city: "New York",
-    state: "New York",
-    people: [
-      {
-        id: 0,
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/9/9a/Kirsten_Gillibrand%2C_official_photo%2C_116th_Congress.jpg",
-        title: "United States Senator",
-        name: "Kirsten Gillibrand",
-        phone: "202-224-6542",
-        address: "478 Russell Senate Office Building Washington, DC 20510",
-        email: "mockdata@gmail.com",
-        party: "Democrat",
-        state: "New York"
-      },
+  let zipCodeBundle;
 
-      {
-        id: 1,
-        image:
-          "https://upload.wikimedia.org/wikipedia/commons/9/9a/Kirsten_Gillibrand%2C_official_photo%2C_116th_Congress.jpg",
-        title: "ActivatedSenatorV2",
-        name: "Kristi G. Bloq 2",
-        phone: "202-224-6542",
-        email: "mockdata@gmail.com",
-        address: "478 Russell Senate Office Building Washington, DC 20510",
-        party: "DemiLavato",
-        state: "NewerY"
-      }
-    ]
-  };
-
-  let selectedPerson = 0;
+  let selectedPerson;
   let dropdownSize = 500;
-
-  const getZipCode = () => {
-    /*
-    getZipCodeBundle(zipCode).then(res => {
-      zipCodeBundle = res;
-    });
-    */
-  };
 
   onMount(() => {
     getZipCode();
   });
 </script>
 
-<div class="flex flex-col flex-1">
-  <div class="flex flex-col mt-16 mb-24">
-    <div class="flex contained">
-      <h1 class="text-4xl mr-auto">{zipCode}</h1>
-      <h2 class="text-4xl text-c-header-1">
-        {zipCodeBundle.city}, {zipCodeBundle.state}
-      </h2>
+{#if zipCodeBundle}
 
+  <div class="flex flex-col flex-1">
+    <div class="flex flex-col mt-16 mb-24">
+      <div class="flex contained">
+        <input
+          maxlength="5"
+          on:keydown={e => {
+            if (e.key === 'Enter') {
+              loadNewZip();
+            }
+          }}
+          bind:value={zipCode}
+          class="text-4xl mr-auto" />
+        <h2 class="text-4xl text-c-header-1">
+          {zipCodeBundle.city}, {zipCodeBundle.state}
+        </h2>
+
+      </div>
+
+      <hr style="height: 1.5px" class="bg-c-border-2 contained" />
+
+      <span class="contained text-lg pt-2 text-c-header-1">Zip Code</span>
     </div>
 
-    <hr style="height: 1.5px" class="bg-c-border-2 contained" />
+    <ul class="grid contained mb-24">
+      {#each zipCodeBundle.people as person (person.id)}
+        <li
+          style="padding-top: 100%; margin-bottom: {selectedPerson === person.id ? dropdownSize : 0}px"
+          class="relative border-2 rounded-lg border-c-border-3 {selectedPerson === person.id ? 'shadow-lg' : ''}
+          self-start">
+          <div
+            on:click={() => (selectedPerson === person.id ? (selectedPerson = null) : (selectedPerson = person.id))}
+            class="absolute top-0 left-0 w-full h-full flex flex-col">
+            <div class="flex flex-1 items-center justify-center">
+              {#if person.image}
+                <img
+                  class="w-32 h-32 object-cover rounded-full mx-auto"
+                  alt="Portrait of {person.name}"
+                  src={person.image} />
+              {:else}
+                <div
+                  class="w-32 h-32 border-2 border-c-border-3 flex flex-col
+                  items-center justify-center rounded-full mx-auto">
+                  <Icon icon={fasUser} class="text-5xl text-c-header-1" />
+                </div>
+              {/if}
 
-    <span class="contained text-lg pt-2 text-c-header-1">Zip Code</span>
+            </div>
+
+            <div class="p-4">
+              <h4 class="font-semibold">{person.title}</h4>
+              <h3>{person.name}</h3>
+              <div class="flex flex-row items-center">
+                <h5>{person.party}</h5>
+                <div class="flex flex-row ml-auto">
+                  {#if person.twitter}
+                    <Icon class="px-1" icon={twitter} />
+                  {/if}
+                  {#if person.phone}
+                    <Icon class="px-1" icon={fasPhone} />
+                  {/if}
+                  {#if person.email}
+                    <Icon class="px-1" icon={fasEnvelope} />
+                  {/if}
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {#if selectedPerson === person.id}
+            <MessagingDropdown {person} {tweets} height={dropdownSize} />
+          {/if}
+        </li>
+      {/each}
+    </ul>
   </div>
-
-  <ul class="grid contained mb-24">
-    {#each zipCodeBundle.people as person (person.id)}
-      <li
-        style="padding-top: 100%; margin-bottom: {selectedPerson === person.id ? dropdownSize : 0}px"
-        class="relative border-2 rounded-lg border-c-border-3 self-start">
-        <div class="absolute top-0 left-0 w-full h-full flex flex-col">
-          <div class="flex flex-1 items-center">
-            <img
-              class="w-32 h-32 object-cover rounded-full mx-auto"
-              alt="Portrait of {person.name}"
-              src={person.image} />
-          </div>
-          <div class="p-4">
-            <h4 class="font-semibold">{person.title}</h4>
-            <h3>{person.name}</h3>
-            <h5>{person.party}</h5>
-          </div>
-        </div>
-
-        {#if selectedPerson === person.id}
-          <MessagingDropdown {person} {tweets} height={dropdownSize} />
-        {/if}
-      </li>
-    {/each}
-  </ul>
-</div>
+{/if}
 
 <style>
   @import "../style/shared.css";
