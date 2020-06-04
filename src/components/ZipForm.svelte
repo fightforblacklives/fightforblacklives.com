@@ -11,7 +11,7 @@
 
 <div
   style="width: {width}px; {$$props.style || ''}"
-  class="flex rounded-full border border-c-border-2 max-h-full {$$props.class || ''}">
+  class="flex zip rounded-full border-c-border-2 max-h-full {$$props.class || ''}">
   <input
     placeholder="enter your zip code"
     on:keydown={e => {
@@ -35,6 +35,15 @@
 
 <style>
   @import "../style/shared.css";
+
+  .zip {
+    border-width: var(--zip-border-width, 1px);
+    border-style: solid;
+  }
+
+  .zip-input {
+    font-size: var(--zip-font-size, 1.3em);
+  }
 
   .zip-input::placeholder {
     color: inherit;

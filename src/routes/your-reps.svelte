@@ -22,6 +22,7 @@
       `${staticPath}/your-reps#${zipCode}`
     );
     getZipCode();
+    selectedPerson = null;
   };
 
   let zipCode = process.browser ? window.location.hash.slice(1, 6) : null;
