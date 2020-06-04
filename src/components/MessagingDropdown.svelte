@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import Icon from "components/Icon";
   import { twitter, fasEnvelope, fasPhone, facebook } from "config/icons.ts";
+  import { slide } from "svelte/transition";
   export let height;
   export let offset = false;
   export let tweets;
@@ -11,6 +12,12 @@
   $: topics = Array.from(new Set(tweets.flatMap(tweet => tweet.topics)));
 
   let el;
+
+  const scale = () => {
+    return {
+      css: t => `max-height: ${t * 100}%;`
+    };
+  };
 
   onMount(() => {
     offset = el.parentElement.getBoundingClientRect().x;
@@ -23,6 +30,7 @@
       style="height: {height}px; left: -{offset}px; font-family: {`system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif`};"
       class="absolute top-full w-screen flex flex-col text-c-text-twitter">
       <div
+        transition:scale
         style="max-height: 100%;"
         class="flex bg-white border-t-2 border-b-2 border-c-border-3 flex-1 my-6">
         <div class="contained flex flex-1">

@@ -79,7 +79,17 @@
   let dropdownSize = 500;
 
   const getParty = party => {
-    return party.includes("Democrat") ? "D" : "R";
+    if (party == null) {
+      return "";
+    }
+
+    party = party.toLowerCase();
+
+    if (party.includes("independent")) return "(I)";
+    if (party.includes("democrat")) return "(D)";
+    if (party.includes("republic")) return "(R)";
+
+    return "";
   };
 
   onMount(() => {
@@ -141,19 +151,19 @@
             <div class="p-4 flex flex-col text-center items-center">
               <h4 class="font-semibold">
                 {person.name}
-                <span class="font-normal">({getParty(person.party)})</span>
+                <span class="font-normal">{getParty(person.party)}</span>
               </h4>
               <h3 class="text-sm">{person.title}</h3>
 
               <div class="flex mt-3">
                 {#if person.twitter}
-                  <Icon class="px-3" icon={twitter} />
+                  <Icon class="px-2" icon={twitter} />
                 {/if}
                 {#if person.phone}
-                  <Icon class="px-3" icon={fasPhone} />
+                  <Icon class="px-2" icon={fasPhone} />
                 {/if}
                 {#if person.email}
-                  <Icon class="px-3" icon={fasEnvelope} />
+                  <Icon class="px-2" icon={fasEnvelope} />
                 {/if}
               </div>
             </div>
