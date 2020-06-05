@@ -1,6 +1,6 @@
 <script>
   import { getZipCodeBundle, getDataByAddress } from "utils/api";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { staticPath } from "config/static";
   import MessagingDropdown from "components/MessagingDropdown";
   import Icon from "components/Icon";
@@ -11,6 +11,10 @@
     facebook,
     fasUser
   } from "config/icons.ts";
+
+  let animationDuration = 250;
+  let gridEl;
+
   const getZipCode = async () => {
     zipCodeBundle = await getDataByAddress(zipCode);
   };
@@ -26,58 +30,155 @@
   };
 
   let zipCode = process.browser ? window.location.hash.slice(1, 6) : null;
+  let lastArrowRect = null;
 
-  let tweets = [
+  let topics = [
+    "Police Accountability",
+    "Use of Force",
+    "Policing for Profit",
+    "Invest in Community",
+    "Mental Health",
+    "Broken Windows Policing"
+  ];
+
+  let testTweets = [
     {
       id: "test2",
-      topics: [
-        "Police Accountability",
-        "Use of Force",
-        "Policing for Profit",
-        "Invest in Community",
-        "Mental Health",
-        "Broken Windows Policing"
-      ],
+      topic: "Police Accountability",
       text: "This is my text. This is not long."
     },
 
     {
       id: "test1",
-      topics: ["Third Topic"],
+      topic: "Police Accountability",
       text:
         "This tweet is longer and more interisting with more #hashtags and squiggles."
     },
 
     {
       id: "test4",
-      topics: ["Third Topic"],
+      topic: "Use of Force",
       text:
         "This tweet is longer and more interisting with more #hashtags and squiggles."
     },
     {
       id: "test5",
-      topics: ["Third Topic"],
+      topic: "Policing for Profit",
       text:
         "This tweet is longer and more interisting with more #hashtags and squiggles."
     },
     {
       id: "test6",
-      topics: ["Third Topic"],
+      topic: "Invest in Community",
       text:
         "This tweet is longer and more interisting with more #hashtags and squiggles."
     },
 
     {
       id: "test7",
-      topics: ["Third Topic"],
+      topic: "Mental Health",
+      text:
+        "This tweet is longer and more interisting with more #hashtags and squiggles."
+    },
+
+    {
+      id: "test7",
+      topic: "Broken Windows Policing",
       text:
         "This tweet is longer and more interisting with more #hashtags and squiggles."
     }
   ];
+
+  let tweetTopics = topics.map(topic => {
+    return {
+      topic: topic,
+      tweets: testTweets
+    };
+  });
+
   let zipCodeBundle;
 
+  let lastPerson;
+  let nextPerson;
   let selectedPerson;
   let dropdownSize = 500;
+
+  const selectCard = async (e, person) => {
+    if (selectedPerson === person.id) {
+      lastPerson = person.id;
+      nextPerson = null;
+
+      await tick();
+
+      selectedPerson = null;
+      lastPerson = null;
+    } else {
+      lastPerson = selectedPerson;
+      nextPerson = person.id;
+
+      await tick();
+
+      selectedPerson = person.id;
+    }
+  };
+
+  const getGridColumns = gridEl => {
+    return window.getComputedStyle(gridEl)["grid-template-columns"].split(" ")
+      .length;
+  };
+
+  const getExitTransitionType = (lastPerson, nextPerson) => {
+    const lastPos = zipCodeBundle.people.findIndex(
+      person => person.id === lastPerson
+    );
+    const nextPos = zipCodeBundle.people.findIndex(
+      person => person.id === nextPerson
+    );
+    const columns = getGridColumns(gridEl);
+    const lastRow = Math.floor(lastPos / columns);
+    const nextRow = Math.floor(nextPos / columns);
+
+    if (nextPos == -1) {
+      return { type: "collapse-expand", duration: animationDuration };
+    }
+
+    if (lastRow === nextRow) {
+      return {
+        type: "swap",
+        direction: nextPos < lastPos ? -1 : 1,
+        duration: animationDuration
+      };
+    }
+
+    return { type: "collapse-expand", duration: animationDuration };
+  };
+
+  const getTransitionType = (lastPerson, nextPerson) => {
+    const lastPos = zipCodeBundle.people.findIndex(
+      person => person.id === lastPerson
+    );
+    const nextPos = zipCodeBundle.people.findIndex(
+      person => person.id === nextPerson
+    );
+    const columns = getGridColumns(gridEl);
+
+    const lastRow = Math.floor(lastPos / columns);
+    const nextRow = Math.floor(nextPos / columns);
+
+    if (lastPos == -1) {
+      return { type: "collapse-expand", duration: animationDuration };
+    }
+
+    if (lastRow === nextRow) {
+      return {
+        type: "swap",
+        duration: animationDuration,
+        direction: nextPos < lastPos ? 1 : -1
+      };
+    }
+
+    return { type: "collapse-expand", duration: animationDuration };
+  };
 
   const getParty = party => {
     if (party == null) {
@@ -92,6 +193,8 @@
 
     return "";
   };
+
+  let cardWidth;
 
   onMount(() => {
     getZipCode();
@@ -124,15 +227,16 @@
       <span class="contained text-lg pt-2 text-c-header-1">Zip Code</span>
     </div>
 
-    <ul class="grid contained mb-24">
+    <ul bind:this={gridEl} class="grid contained mb-24">
       {#each zipCodeBundle.people as person (person.id)}
-        <li
-          style="padding-top: 100%; margin-bottom: {selectedPerson === person.id ? dropdownSize : 0}px"
-          class="relative border-2 rounded-lg border-c-border-3 {selectedPerson === person.id ? 'shadow-lg' : ''}
-          self-start">
+        <li class="card relative self-start">
           <div
-            on:click={() => (selectedPerson === person.id ? (selectedPerson = null) : (selectedPerson = person.id))}
-            class="absolute top-0 left-0 w-full h-full flex flex-col">
+            on:click={e => selectCard(e, person)}
+            style="transition: box-shadow {(animationDuration / 1000).toFixed(4)}s;
+            height: {cardWidth}px;"
+            class="select-none cursor-pointer card-content flex flex-col
+            border-2 rounded-lg border-c-border-3 {selectedPerson === person.id ? 'shadow-lg' : ''}
+            ">
             <div class="flex flex-1 items-center justify-center">
               {#if person.image}
                 <img
@@ -146,7 +250,6 @@
                   <Icon icon={fasUser} class="text-5xl text-c-header-1" />
                 </div>
               {/if}
-
             </div>
 
             <div class="p-4 flex flex-col text-center items-center">
@@ -172,10 +275,18 @@
           </div>
 
           {#if selectedPerson === person.id}
-            <MessagingDropdown {person} {tweets} height={dropdownSize} />
+            <MessagingDropdown
+              transition={person.id === lastPerson ? getExitTransitionType(lastPerson, nextPerson) : getTransitionType(lastPerson, selectedPerson)}
+              {lastArrowRect}
+              on:lastRect={e => (lastArrowRect = e.detail)}
+              exiting={person.id === lastPerson}
+              {person}
+              tweets={tweetTopics}
+              height={dropdownSize} />
           {/if}
         </li>
       {/each}
+      <li bind:offsetWidth={cardWidth} />
     </ul>
   </div>
 {/if}

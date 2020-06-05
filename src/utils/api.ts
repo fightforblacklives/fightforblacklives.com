@@ -102,11 +102,10 @@ ${p.address[0].city}, ${p.address[0].state}, ${p.address[0].zip}`
           : null,
     };
   });
+
   const people = [...googlePeople, ...addlPeople].map((x, i) =>
     Object.assign({}, x, { id: i })
   );
-  console.log(googleCivicData);
-  console.log(addlData);
 
   return {
     city,

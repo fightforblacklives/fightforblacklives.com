@@ -17,6 +17,9 @@ input:focus {
   --color-twitter-black: #15171a;
   --color-twitter-dark-gray: #647787;
   --color-twitter-blue: #1da1f2;
+  --color-twitter-link: #1996e0;
+  --color-twitter-lightest-gray: #fafafa;
+  --color-twitter-light-blue: #e2effa;
 
   --c-button-primary: var(--color-brown);
   --c-border-1: var(--color-brown);
@@ -33,6 +36,10 @@ input:focus {
   --c-text-twitter: var(--color-twitter-black);
   --c-header-twitter: var(--color-twitter-dark-gray);
   --c-button-twitter: var(--color-twitter-blue);
+  --c-bg-secondary-twitter: var(--color-twitter-lightest-gray);
+  --c-link-twitter: var(--color-twitter-link);
+  --c-link-2-twitter: var(--color-twitter-dark-gray);
+  --c-button-2-twitter: var(--color-twitter-light-blue);
 }
 
 body,

@@ -24,7 +24,6 @@
   });
 
   const type = async () => {
-    console.log(texts);
     for (const text of texts) {
       await text(true);
     }
