@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "concurrently \"sapper dev\" \"npm run dev:tailwind\"",
-    "publish": "./deploy.sh",
+    "publish": "./deploy",
     "build": "npm run build:tailwind && NODE_ENV=production sapper build",
     "export": "npm run build:tailwind && NODE_ENV=production sapper export --entry \"/ /your-reps\"",
     "start": "node __sapper__/build",
