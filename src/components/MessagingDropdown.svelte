@@ -132,12 +132,13 @@
       return 0;
     }
 
-    return rect.x + rect.width / 2;
+    return rect.left + rect.width / 2;
   };
 
   const onResize = () => {
     const parentRect = el.parentElement.getBoundingClientRect();
-    offset = parentRect.x;
+    console.log(parentRect);
+    offset = parentRect.left;
   };
 
   onMount(async () => {
@@ -154,10 +155,10 @@
     const elRect = el.getBoundingClientRect();
     const bodyRect = document.body.getBoundingClientRect();
 
-    const bottomScreen = window.innerHeight - bodyRect.y;
-    const topOfEl = elRect.y - bodyRect.y;
+    const bottomScreen = window.innerHeight - bodyRect.top;
+    const topOfEl = elRect.top - bodyRect.top;
     const bottomOfMessage = topOfEl + height;
-    const topOfParent = parentRect.y - bodyRect.y;
+    const topOfParent = parentRect.top - bodyRect.top;
 
     if (window.innerWidth < 1024 || bottomScreen < bottomOfMessage) {
       window.scroll({
@@ -179,7 +180,7 @@
         const elRect = el.getBoundingClientRect();
 
         tweetScroller.scroll({
-          top: tweetScroller.scrollTop + (elRect.y - scrollerRect.y),
+          top: tweetScroller.scrollTop + (elRect.top - scrollerRect.top),
           behavior: "smooth"
         });
       }

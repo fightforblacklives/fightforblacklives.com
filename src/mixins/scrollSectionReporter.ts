@@ -12,7 +12,7 @@ export default (el: HTMLElement, { selector, offsetTop, itemData }) => {
         .reverse()
         .find((child) => {
           const rect = child.getBoundingClientRect();
-          const delta = rect.y - elRect.y;
+          const delta = rect.top - elRect.top;
 
           return delta < offsetTop;
         }) ?? els[0];

@@ -156,7 +156,6 @@ export const getDataByAddress = async (zip) => {
         email: x.email && x.email.length ? x.email[0] : null,
       })
     );
-
   const city = googleCivicData.normalizedInput.city;
   const state = googleCivicData.normalizedInput.state;
   const googlePeople = googleCivicData.officials.flatMap((p, i) => {
@@ -199,8 +198,6 @@ ${p.address[0].city}, ${p.address[0].state}, ${p.address[0].zip}`
   const people = peopleSort([...googlePeople, ...addlPeople]).map((x, i) =>
     Object.assign({}, x, { id: i })
   );
-
-  console.log(people);
 
   return {
     city,

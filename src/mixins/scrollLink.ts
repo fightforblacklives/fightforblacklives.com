@@ -13,7 +13,7 @@ export default (el) => {
     const bodyRect = window.document.body.getBoundingClientRect();
     const elRect = el.getBoundingClientRect();
 
-    const scrollPosition = elRect.y - bodyRect.y;
+    const scrollPosition = elRect.top - bodyRect.top;
 
     window.scroll({ top: scrollPosition - 150, behavior: "smooth" });
   };
