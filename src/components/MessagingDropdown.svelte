@@ -378,7 +378,7 @@
             </button>
 
             <div
-              class="py-6 lg:pb-0 contained-md-down {infoOpen ? 'hidden' : ''}
+              class="py-6 lg:pb-0 contained-md-down {infoOpen ? '' : 'hidden'}
               sm:block">
               <h2 class="text-2xl font-semibold">{person.name}</h2>
               <h3 class="text-2xl">{person.title}</h3>

@@ -320,7 +320,9 @@
   @import "../style/shared.css";
 
   .card {
-    border-width: 0 !important;
+    @screen sm {
+      border-width: 0 !important;
+    }
   }
 
   .grid {

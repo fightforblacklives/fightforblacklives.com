@@ -213,11 +213,6 @@
   }
 
   .section-text {
-    @apply text-justify;
-
-    @screen md {
-      @apply text-left;
-    }
   }
 
   .section-header {
