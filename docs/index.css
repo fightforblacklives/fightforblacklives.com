@@ -61,6 +61,11 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
 /* Text-level semantics
    ========================================================================== */
 
@@ -276,7 +281,8 @@ h4,
 h5,
 hr,
 figure,
-p {
+p,
+pre {
   margin: 0;
 }
 
@@ -438,7 +444,7 @@ input {
  * 'mono' font family.
  */
 
-
+pre,
 code {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
