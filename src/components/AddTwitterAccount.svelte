@@ -39,8 +39,8 @@
   </h2>
 
   <p class="mt-8">
-    Help us fight for black lives by adding it below. We'll review your
-    suggestion to make sure we find the right Twitter account.
+    Join the fight and help us by adding it below. We'll review your suggestion
+    to make sure we find the right Twitter account.
   </p>
 
   {#if !submitted}

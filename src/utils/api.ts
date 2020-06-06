@@ -19,6 +19,48 @@ const fuzzyName = (name1, name2) => {
   return isMatch;
 };
 
+const dedupeBy = <T, C>(getKey: (value: T) => C, list: T[]) => {
+  const items = new Set();
+
+  return list.filter((value) => {
+    const key = getKey(value);
+    if (!items.has(key)) {
+      items.add(key);
+      return true;
+    }
+
+    return false;
+  });
+};
+
+const peopleSort = (people) => {
+  const priorityList = [
+    "U.S. Senator",
+    "U.S. Representative",
+    "US Representative",
+    "Governor",
+    "Lieutenant Governor",
+    "State Senator",
+    "State Representative",
+    "Mayor",
+    "Sheriff",
+    "District Attorney",
+  ];
+
+  const ordered = priorityList.flatMap((plitem) =>
+    people.filter((p) => p.title.includes(plitem))
+  );
+
+  const included = new Set(ordered.map((x) => x.name));
+
+  const remaining = [
+    ...people.filter((x) => !included.has(x.name) && x.image),
+    ...people.filter((x) => !included.has(x.name) && !x.image),
+  ];
+
+  return dedupeBy((x) => x.name, [...ordered, ...remaining]);
+};
+
 const id = (x) => x;
 
 const request = async (url: string) => {
@@ -91,7 +133,6 @@ export const getDataByAddress = async (zip) => {
   const addlData = await request(
     `https://d2jm68nhxp4m1b.cloudfront.net/zip-code-bundles/${zip}.jsonp`
   );
-  console.log(addlData);
   const addlPeople = addlData.people
     .filter(
       (x) => !googleCivicData.officials.some((y) => fuzzyName(y.name, x.name))
@@ -115,7 +156,7 @@ export const getDataByAddress = async (zip) => {
         email: x.email && x.email.length ? x.email[0] : null,
       })
     );
-  console.log(addlPeople);
+
   const city = googleCivicData.normalizedInput.city;
   const state = googleCivicData.normalizedInput.state;
   const googlePeople = googleCivicData.officials.flatMap((p, i) => {
@@ -155,9 +196,11 @@ ${p.address[0].city}, ${p.address[0].state}, ${p.address[0].zip}`
     };
   });
 
-  const people = [...googlePeople, ...addlPeople].map((x, i) =>
+  const people = peopleSort([...googlePeople, ...addlPeople]).map((x, i) =>
     Object.assign({}, x, { id: i })
   );
+
+  console.log(people);
 
   return {
     city,
