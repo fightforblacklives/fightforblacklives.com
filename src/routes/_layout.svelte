@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <Nav />
+  <Nav {segment} />
 
   <main class="flex self-stretch flex-1">
     <slot />

@@ -4,6 +4,7 @@
   import { staticPath } from "config/static";
   import MessagingDropdown from "components/MessagingDropdown";
   import Icon from "components/Icon";
+  import RepCardInfo from "components/RepCardInfo";
   import {
     twitter,
     fasEnvelope,
@@ -177,20 +178,6 @@
     return { type: "collapse-expand", duration: animationDuration };
   };
 
-  const getParty = party => {
-    if (party == null) {
-      return "";
-    }
-
-    party = party.toLowerCase();
-
-    if (party.includes("independent")) return "(I)";
-    if (party.includes("democrat")) return "(D)";
-    if (party.includes("republic")) return "(R)";
-
-    return "";
-  };
-
   let cardWidth;
 
   onMount(() => {
@@ -216,13 +203,14 @@
         <input
           pattern={'\\d*'}
           maxlength="5"
+          style="max-width: 100px;"
           on:keydown={e => {
             if (e.key === 'Enter') {
               loadNewZip();
             }
           }}
           bind:value={zipCode}
-          class="text-4xl mr-auto" />
+          class="text-4xl mr-auto bg-transparent" />
         <h2 class="text-4xl text-c-header-1">
           {zipCodeBundle.city}, {zipCodeBundle.state}
         </h2>
@@ -234,20 +222,21 @@
       <span class="contained text-lg pt-2 text-c-header-1">Zip Code</span>
     </div>
 
-    <ul bind:this={gridEl} class="grid contained mb-24">
+    <ul bind:this={gridEl} class="grid sm:contained mb-24">
       {#each zipCodeBundle.people as person (person.id)}
-        <li class="card relative self-start">
+        <li class="card relative sm:self-start flex flex-col">
           <div
             on:click={e => selectCard(e, person)}
             style="transition: box-shadow {(animationDuration / 1000).toFixed(4)}s;
             height: {cardWidth}px;"
-            class="select-none cursor-pointer card-content flex flex-col
-            border-2 rounded-lg border-c-border-3 {selectedPerson === person.id ? 'shadow-lg' : ''}
+            class="hidden sm:flex select-none cursor-pointer card-content
+            flex-col border-2 rounded-lg border-c-border-3 {selectedPerson === person.id ? 'shadow-lg' : ''}
             ">
             <div class="flex flex-1 items-center justify-center">
               {#if person.image}
                 <img
-                  class="w-40 h-40 object-cover rounded-full mx-auto"
+                  style="width: {0.5 * cardWidth}px; height: {0.5 * cardWidth}px"
+                  class="card-image object-cover rounded-full mx-auto"
                   alt="Portrait of {person.name}"
                   src={person.image.startsWith('http://') ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(person.image)}` : person.image} />
               {:else}
@@ -259,26 +248,11 @@
               {/if}
             </div>
 
-            <div class="p-4 flex flex-col text-center items-center">
-              <h4 class="font-semibold">
-                {person.name}
-                <span class="font-normal">{getParty(person.party)}</span>
-              </h4>
-              <h3 class="text-sm">{person.title}</h3>
+            <RepCardInfo {person} />
+          </div>
 
-              <div class="flex mt-3">
-                {#if person.twitter}
-                  <Icon class="px-2" icon={twitter} />
-                {/if}
-                {#if person.phone}
-                  <Icon class="px-2" icon={fasPhone} />
-                {/if}
-                {#if person.email}
-                  <Icon class="px-2" icon={fasEnvelope} />
-                {/if}
-              </div>
-            </div>
-
+          <div class="card-content flex sm:hidden border-t-2 border-c-border-3">
+            <RepCardInfo {person} />
           </div>
 
           {#if selectedPerson === person.id}
@@ -302,8 +276,17 @@
   @import "../style/shared.css";
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 32px;
+    @apply flex flex-col;
+    max-width: none;
+
+    @media only screen and (max-width: 1344px) {
+      max-width: calc(100vw - 64px);
+    }
+
+    @screen sm {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 32px;
+    }
   }
 </style>

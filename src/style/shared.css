@@ -5,10 +5,10 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 1304px) {
+@media only screen and (max-width: 1344px) {
   .contained {
-    @apply mx-6;
-    width: calc(100% - 48px);
+    @apply mx-8;
+    width: calc(100% - 64px);
   }
 }
 

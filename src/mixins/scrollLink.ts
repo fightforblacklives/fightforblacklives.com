@@ -2,7 +2,12 @@ export default (el) => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    const selector = e.target.href.split("#")[1];
+    const [pathName, selector] = e.target.href.split("#");
+
+    if (pathName !== window.location.pathname) {
+      window.location.href = pathName + "#" + selector;
+      return;
+    }
 
     const el = document.querySelector("#" + selector);
     const bodyRect = window.document.body.getBoundingClientRect();

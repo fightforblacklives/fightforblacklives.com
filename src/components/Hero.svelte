@@ -34,7 +34,7 @@
   $: contactText =
     windowWidth > 768
       ? "Contact your representatives (we'll help)."
-      : "Contact your law makers.";
+      : "Contact your lawmakers.";
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />

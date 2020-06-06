@@ -185,7 +185,7 @@
   <div class="contained hero-container mb-24">
     <p class="text-c-header-1">Still scrolling?</p>
     <p class="text-c-header-1">Enter your zip code.</p>
-    <p class="text-c-header-1">Contact your law makers.</p>
+    <p class="text-c-header-1">Contact your lawmakers.</p>
     <p>Fight For Black Lives.</p>
   </div>
 </div>
