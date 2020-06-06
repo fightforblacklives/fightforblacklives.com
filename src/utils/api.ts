@@ -22,14 +22,52 @@ const fuzzyName = (name1, name2) => {
 const id = (x) => x;
 
 const request = async (url: string) => {
-  return fetch(url, {
-    cache: "no-cache",
-  })
-    .then((res) => res.text())
-    .then((res) => {
-      console.log(res);
-      return new Function("callback", `return ${res}`)(id);
-    });
+  const jsonP = new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET", url, true);
+
+    const headers = {
+      Accept: "*/*",
+    };
+
+    for (let i in headers) {
+      xhr.setRequestHeader(i, headers[i]);
+    }
+
+    let callback: any = function (type) {
+      return function () {
+        if (callback) {
+          callback = xhr.onload = xhr.onerror = xhr.onabort = xhr.ontimeout = null;
+
+          if (type === "abort") {
+            xhr.abort();
+          } else if (type === "error") {
+            reject(new Error(`failed http request: ${xhr.statusText}`));
+          } else {
+            resolve(xhr.responseText);
+          }
+        }
+      };
+    };
+
+    xhr.onload = callback();
+    xhr.onabort = xhr.onerror = xhr.ontimeout = callback("error");
+
+    callback = callback("abort");
+
+    try {
+      xhr.send(null);
+    } catch (e) {
+      if (callback) {
+        throw e;
+      }
+    }
+  });
+
+  return jsonP.then((res) => {
+    return new Function("callback", `return ${res}`)(id);
+  });
 };
 
 const googleCivicApi = async (address) => {
