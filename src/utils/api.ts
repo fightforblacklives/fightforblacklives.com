@@ -55,9 +55,24 @@ export const getDataByAddress = async (zip) => {
   const addlData = await request(
     `https://raw.githubusercontent.com/fightforblacklives/ffbl-data/master/zip-code-bundles/${zip}.jsonp`
   );
-  const addlPeople = addlData.people.filter(
-    (x) => !googleCivicData.officials.some((y) => fuzzyName(y.name, x.name))
-  );
+  const addlPeople = addlData.people
+    .filter(
+      (x) => !googleCivicData.officials.some((y) => fuzzyName(y.name, x.name))
+    )
+    .map((x) =>
+      Object.assign({}, x, {
+        address:
+          x.address && x.address.length
+            ? x.address[0].replace(/;/g, ", ")
+            : null,
+        phone:
+          x.phone && Array.isArray(x.phone) && x.phone.length > 0
+            ? x.phone[0]
+            : x.phone,
+        email: x.email && x.email.length ? x.email[0] : null,
+      })
+    );
+  console.log(addlPeople);
   const city = googleCivicData.normalizedInput.city;
   const state = googleCivicData.normalizedInput.state;
   const googlePeople = googleCivicData.officials.flatMap((p, i) => {

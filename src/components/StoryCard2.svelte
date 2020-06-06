@@ -2,34 +2,8 @@
   import { fade, fly } from "svelte/transition";
   import { onDestroy, onMount } from "svelte";
   import { delay } from "utils/time";
-
+  const profiles = require("config/blackPeopleKilledByPolice.json");
   export let style = "";
-
-  const profiles = [
-    {
-      name: "Breonna Taylor",
-      date: "03/12/2019",
-      mannerOfDeath: "Shot",
-      armed: "Unarmed",
-      age: 26,
-      sex: "Female",
-      location: "Louisville, KY",
-      fleeing: "Not fleeing",
-      bodyCamera: "No body camera"
-    },
-
-    {
-      name: "Chris E.",
-      date: "03/16/2020",
-      mannerOfDeath: "Shot",
-      armed: "Unarmed",
-      age: 45,
-      sex: "Male",
-      location: "Detroit, MI",
-      fleeing: "Not fleeing",
-      bodyCamera: "No body camera"
-    }
-  ];
 
   let currentProfile = 0;
 
@@ -81,7 +55,7 @@
     { name: "Age", key: "age" },
     { name: "Sex", key: "sex" },
     { name: "Location", key: "location" },
-    { name: "Fleeing the Scene", key: "fleeing" },
+    { name: "Fleeing the Scene", key: "fleeingTheScene" },
     { name: "Body Camera", key: "bodyCamera" }
   ];
 </script>

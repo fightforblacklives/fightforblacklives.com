@@ -2,7 +2,7 @@
   import { getZipCodeBundle } from "utils/api";
   import Hero from "components/Hero";
   import ZipForm from "components/ZipForm";
-  import StoryCard from "components/StoryCard";
+
   import StoryCard2 from "components/StoryCard2";
   import scrollLink from "mixins/scrollLink";
   import { staticPath } from "config/static";
@@ -108,7 +108,9 @@
         </p>
       </div>
 
-      <StoryCard2 class="mt-16 lg:mt-0 story-card" />
+      <StoryCard2
+        style="border-radius: 16px;"
+        class="mt-16 lg:mt-0 story-card" />
     </div>
   </div>
 
@@ -155,9 +157,9 @@
     </div>
 
     <div
-      style="flex: 0 0 500px;"
+      style="flex: 0 0 500px; border-radius: 16px;"
       class="flex flex-col items-center border-2 border-c-border-3 lg:ml-16
-      justify-center p-12 text-lg mt-16 lg:mt-0">
+      justify-center p-12 text-lg mt-16 lg:mt-0 jason-round">
       <img
         alt="Color of Change Logo"
         class="w-48"
