@@ -23,11 +23,13 @@
       <div
         class="flex flex-col underline text-left mt-6 sm:mt-0 sm:text-right
         sm:justify-end sm:flex-row sm:flex-wrap org-list">
-        <a href="todo">Campaign Zero</a>
-        <a href="todo">Color of Change</a>
-        <a href="todo">Black Lives Matter</a>
-        <a href="todo">Minnesota Freedom Fund</a>
-        <a href="todo">National Lawyers Guild Mass Defense Fund</a>
+        <a href="https://www.joincampaignzero.org/">Campaign Zero</a>
+        <a href="https://colorofchange.org/">Color of Change</a>
+        <a href="https://blacklivesmatter.com/">Black Lives Matter</a>
+        <a href="https://minnesotafreedomfund.org/">Minnesota Freedom Fund</a>
+        <a href="https://www.nlg.org/massdefenseprogram/">
+          National Lawyers Guild Mass Defense Fund
+        </a>
       </div>
     </div>
 
@@ -74,7 +76,7 @@
         {#each bottomLinks as link}
           <a href={link.url}>{link.name}</a>
         {/each}
-        <a href="/todo">Twitter</a>
+        <a href="https://twitter.com/fight4blacklife">Twitter</a>
       </div>
 
       <div

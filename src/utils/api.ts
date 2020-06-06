@@ -1,9 +1,3 @@
-export const getZipCodeBundle = (code: string) => {
-  return request(
-    `https://fightforblacklives.github.io/ffbl-data/zip-code-bundles/${code}.jsonp`
-  );
-};
-
 const fuzzyName = (name1, name2) => {
   name1 = name1
     .toLowerCase()
@@ -28,21 +22,25 @@ const fuzzyName = (name1, name2) => {
 const id = (x) => x;
 
 const request = async (url: string) => {
-  return fetch(url, { cache: "no-cache" })
+  return fetch(url, {
+    cache: "no-cache",
+  })
     .then((res) => res.text())
-    .then((res) => new Function("callback", `return ${res}`)(id));
+    .then((res) => {
+      console.log(res);
+      return new Function("callback", `return ${res}`)(id);
+    });
 };
 
 const googleCivicApi = async (address) => {
   const apiKey = "AIzaSyDVb6LeI3JZCBL9j228ujYz2kjqsfgbnLk";
   const data = await fetch(
-    `https://www.googleapis.com/civicinfo/v2/representatives?key=${apiKey}&address=${address}`,
+    `https://d7s3gef0idata.cloudfront.net/representatives?key=${apiKey}&address=${address}`,
     {
       headers: {
         Accept: "application/json",
         "Accept-Language": "en-US,en;q=0.5",
       },
-      referrer: "https://myreps.datamade.us/",
       method: "GET",
       mode: "cors",
     }
@@ -53,14 +51,21 @@ const googleCivicApi = async (address) => {
 export const getDataByAddress = async (zip) => {
   const googleCivicData = await googleCivicApi(zip + ", United States");
   const addlData = await request(
-    `https://raw.githubusercontent.com/fightforblacklives/ffbl-data/master/zip-code-bundles/${zip}.jsonp`
+    `https://d2jm68nhxp4m1b.cloudfront.net/zip-code-bundles/${zip}.jsonp`
   );
+  console.log(addlData);
   const addlPeople = addlData.people
     .filter(
       (x) => !googleCivicData.officials.some((y) => fuzzyName(y.name, x.name))
     )
     .map((x) =>
       Object.assign({}, x, {
+        image: x.image
+          ? x.image.replace(
+              "fightforblacklives.s3.amazonaws.com",
+              "fightforblacklives.s3-accelerate.amazonaws.com"
+            )
+          : null,
         address:
           x.address && x.address.length
             ? x.address[0].replace(/;/g, ", ")

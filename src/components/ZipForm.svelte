@@ -5,7 +5,7 @@
   export let width;
 
   const searchZip = () => {
-    window.location.href = `${staticPath}/your-reps#${zipCode}`;
+    window.location.href = `${staticPath}/your-reps?zip=${zipCode}`;
   };
 </script>
 
@@ -26,7 +26,7 @@
     bind:value={zipCode} />
 
   <button
-    on:click={searchZip}
+    on:click={() => searchZip()}
     class="bg-c-button-primary px-12 text-c-text-1-complement m-1 rounded-full
     self-stretch text-lg">
     Fight!

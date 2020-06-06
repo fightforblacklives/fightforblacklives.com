@@ -1,5 +1,5 @@
 <script>
-  import { getZipCodeBundle, getDataByAddress } from "utils/api";
+  import { getDataByAddress } from "utils/api";
   import { onMount, tick } from "svelte";
   import { staticPath } from "config/static";
   import MessagingDropdown from "components/MessagingDropdown";
@@ -20,11 +20,13 @@
   };
 
   const loadNewZip = () => {
-    window.location.replace(`${staticPath}/your-reps#${zipCode}`);
-    window.location.reload();
+    window.location.href = `${staticPath}/your-reps?zip=${zipCode}`;
   };
 
-  let zipCode = process.browser ? window.location.hash.slice(1, 6) : null;
+  let zipCode = process.browser
+    ? new URLSearchParams(window.location.search).get("zip")
+    : null;
+
   let lastArrowRect = null;
 
   let topics = [

@@ -1,5 +1,4 @@
 <script>
-  import { getZipCodeBundle } from "utils/api";
   import Hero from "components/Hero";
   import ZipForm from "components/ZipForm";
 
