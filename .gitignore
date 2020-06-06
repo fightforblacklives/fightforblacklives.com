@@ -3,8 +3,7 @@
 /src/node_modules/@sapper/
 yarn-error.log
 /cypress/screenshots/
-/__sapper__/build
-/__sapper__/dev
+/__sapper__
 
 .awcache
 .now
