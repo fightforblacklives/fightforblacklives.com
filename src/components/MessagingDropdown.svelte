@@ -356,11 +356,17 @@
             {/if}
             {#if person.phone}
               <h5 class="detail-header">Phone Number</h5>
-              <span class="detail">{person.phone}</span>
+              <a href={`tel:${person.phone}`}>
+
+                <span class="detail">{person.phone}</span>
+              </a>
             {/if}
             {#if person.email}
               <h5 class="detail-header">Email</h5>
-              <span class="detail">{person.email}</span>
+              <a href={`mailto:${person.email}`}>
+
+                <span class="detail">{person.email}</span>
+              </a>
             {/if}
 
             <div class="flex flex-row mt-4">
