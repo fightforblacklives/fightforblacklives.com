@@ -1,0 +1,22 @@
+{
+  "bundler": "webpack",
+  "shimport": null,
+  "assets": {
+    "index": "71ef8ba37cede2492f0f/index.index.js",
+    "index~scratch": "71ef8ba37cede2492f0f/index~scratch.index~scratch.js",
+    "main": [
+      "71ef8ba37cede2492f0f/main.js",
+      "main.d474721f631381b3c9a9.hot-update.js"
+    ],
+    "scratch": "71ef8ba37cede2492f0f/scratch.scratch.js",
+    "vendors~index~scratch~your$45reps": "71ef8ba37cede2492f0f/vendors~index~scratch~your$45reps.vendors~index~scratch~your$45reps.js",
+    "your$45reps": "71ef8ba37cede2492f0f/your$45reps.your$45reps.js"
+  },
+  "css": {
+    "chunks": {
+      "index.svelte": [],
+      "your-reps.svelte": [],
+      "scratch.svelte": []
+    }
+  }
+}
