@@ -8,7 +8,7 @@ const dev = NODE_ENV !== "production";
 
 const app = polka() // You can also use Express
   .use(
-    process.env.NODE_ENV === "development" ? "/" : "/fightforblacklives.com",
+    "/",
     compression({ threshold: 0 }),
     sirv("static", { dev }),
     sapper.middleware()
