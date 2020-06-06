@@ -36,7 +36,8 @@
     "Policing for Profit",
     "Invest in Community",
     "Mental Health",
-    "Broken Windows Policing"
+    "Broken Windows Policing",
+    "Defund the Police"
   ];
 
   let testTweets = [
