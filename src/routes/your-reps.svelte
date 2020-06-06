@@ -242,7 +242,7 @@
                 <img
                   class="w-40 h-40 object-cover rounded-full mx-auto"
                   alt="Portrait of {person.name}"
-                  src={person.image} />
+                  src={person.image.startsWith('http://') ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(person.image)}` : person.image} />
               {:else}
                 <div
                   class="w-40 h-40 border-2 border-c-border-3 flex flex-col
