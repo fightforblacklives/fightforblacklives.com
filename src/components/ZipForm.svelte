@@ -2,7 +2,7 @@
   import { staticPath } from "config/static";
 
   let zipCode;
-  export let width = 600;
+  export let width;
 
   const searchZip = () => {
     window.location.href = `${staticPath}/your-reps#${zipCode}`;
@@ -10,7 +10,7 @@
 </script>
 
 <div
-  style="width: {width}px; {$$props.style || ''}"
+  style="width: {width ? width + 'px' : 'auto'}; {$$props.style || ''}"
   class="flex zip rounded-full border-c-border-2 max-h-full {$$props.class || ''}">
   <input
     placeholder="enter your zip code"

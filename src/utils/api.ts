@@ -1,14 +1,8 @@
-import { memoOnce } from "./memo";
-
 export const getZipCodeBundle = (code: string) => {
   return request(
     `https://fightforblacklives.github.io/ffbl-data/zip-code-bundles/${code}.jsonp`
   );
 };
-
-const getFetch = memoOnce(() => {
-  return import("fetch-jsonp");
-});
 
 const fuzzyName = (name1, name2) => {
   name1 = name1
@@ -27,16 +21,16 @@ const fuzzyName = (name1, name2) => {
   );
 
   const isMatch = name1.filter((n1) => name2.has(n1)).length > 1;
-  console.log(isMatch);
+
   return isMatch;
 };
 
-const request = async (url: string) => {
-  const { default: fetch } = await getFetch();
+const id = (x) => x;
 
-  return fetch(url, { jsonpCallbackFunction: "callback" }).then((res) =>
-    res.json()
-  );
+const request = async (url: string) => {
+  return fetch(url, { cache: "no-cache" })
+    .then((res) => res.text())
+    .then((res) => new Function("callback", `return ${res}`)(id));
 };
 
 const googleCivicApi = async (address) => {

@@ -12,63 +12,103 @@
 </script>
 
 <div class="bg-c-bg-complement text-white footer {$$props.class || ''}">
-  <div class="contained">
-    <div class="font-semibold text-2xl mt-8">How to support</div>
-    <div class="flex flex-row text-lg items-center">
-      <div class="w-4/12">
+  <div class="contained flex flex-col">
+    <h3 class="font-semibold text-4xl sm:text-2xl mt-8">How to support</h3>
+
+    <div class="flex text-xl sm:text-lg sm:items-center flex-col sm:flex-row">
+      <p class="support-p mr-auto">
         Support us by donating to our short list of organizations working to
         fight systematic injustice for Black people in America.
-      </div>
-      <div class="underline ml-auto text-right">
-
-        <div class="flex flex-col text-right">
-          <div class="flex flex-row ml-auto">
-            <a class="mr-6" href="todo">Campaign Zero</a>
-            <a href="todo">Color of Change</a>
-
-          </div>
-          <div class="flex flex-row my-4 ml-auto">
-            <a class="mr-6" href="todo">Black Lives Matter</a>
-            <a href="todo">Minnesota Freedom Fund</a>
-
-          </div>
-          <div class="flex flex-row ml-auto">
-            <a href="todo">National Lawyers Guild Mass Defense Fund</a>
-
-          </div>
-        </div>
+      </p>
+      <div
+        class="flex flex-col underline text-left mt-6 sm:mt-0 sm:text-right
+        sm:justify-end sm:flex-row sm:flex-wrap org-list">
+        <a href="todo">Campaign Zero</a>
+        <a href="todo">Color of Change</a>
+        <a href="todo">Black Lives Matter</a>
+        <a href="todo">Minnesota Freedom Fund</a>
+        <a href="todo">National Lawyers Guild Mass Defense Fund</a>
       </div>
     </div>
-    <div class="flex flex-row font-semibold text-2xl mt-10">
-      <span>Fight for Black Lives.</span>
-      <span class="ml-auto">Follow Us</span>
 
-    </div>
-    <div class="flex flex-row items-center my-10">
-      <ZipForm />
-      <a class="ml-auto" href="https://twitter.com/fight4blacklife">
-        <Icon icon={twitter} class="text-5xl " />
-      </a>
+    <div class="flex flex-row">
+      <div class="flex-col font-semibold flex-1 my-10 mr-8 hidden sm:flex">
+        <h2 class="text-2xl mb-10">Fight for Black Lives.</h2>
+        <ZipForm style="max-width: 500px;" />
+      </div>
 
+      <div class="flex flex-col items-center my-10 hidden md:flex">
+        <h2 class="text-2xl ml-auto mb-10">Follow Us</h2>
+        <a
+          style="height: 50px;"
+          class="flex ml-auto items-center"
+          href="https://twitter.com/fight4blacklife">
+          <Icon icon={twitter} class="text-5xl " />
+        </a>
+      </div>
     </div>
+
     <div
       style="border-top: 1px solid white;"
-      class="flex flex-row justify-between py-6">
+      class="desktop-footer flex flex-row justify-between py-6 flex-col
+      sm:flex-row hidden md:flex text-xs lg:text-lg">
 
       <span>♡ Made in NYC by 3 people that want change.</span>
-      {#each bottomLinks as link}
-        <a class="mx-8" href={link.url}>{link.name}</a>
-      {/each}
 
-      <span>© 2020 Fight for Black Lives</span>
+      <div class="flex mx-auto px-4">
+        {#each bottomLinks as link}
+          <a class="mx-4" href={link.url}>{link.name}</a>
+        {/each}
+      </div>
 
+      <span
+        class="text-center sm:text-left border-t border-white sm:border-0 mt-4
+        sm:mt-0 pt-4 sm:pt-0">
+        © 2020 Fight for Black Lives
+      </span>
     </div>
+
+    <div class="mobile-footer flex flex-col justify-between py-6 md:hidden">
+
+      <div class="flex justify-between border-t border-b border-white py-4">
+        {#each bottomLinks as link}
+          <a href={link.url}>{link.name}</a>
+        {/each}
+        <a href="/todo">Twitter</a>
+      </div>
+
+      <div
+        class="flex text-lg sm:text-left sm:text-base flex-col sm:flex-row mt-4
+        pt-4">
+        <span class="mr-auto hidden sm:block">
+          ♡ Made in NYC by 3 people that want change.
+        </span>
+
+        <span>© 2020 Fight for Black Lives</span>
+      </div>
+    </div>
+
   </div>
 
 </div>
 
 <style>
   @import "../style/shared.css";
+
+  .org-list {
+    @apply -mx-4;
+    max-width: 450px;
+
+    & > a {
+      @apply mx-4 mb-4;
+    }
+  }
+
+  .support-p {
+    @screen sm {
+      max-width: 350px;
+    }
+  }
 
   .footer {
     --c-button-primary: var(--color-brownWhite);
