@@ -1051,10 +1051,6 @@ img {
   text-align: center;
 }
 
-.text-justify {
-  text-align: justify;
-}
-
 .text-white {
   --text-opacity: 1;
   color: #fff;
