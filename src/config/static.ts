@@ -1,1 +1,1 @@
-export const staticPath = "/";
+export const staticPath = "";
