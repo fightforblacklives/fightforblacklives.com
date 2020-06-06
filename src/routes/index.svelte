@@ -1,8 +1,8 @@
 <script>
   import Hero from "components/Hero";
   import ZipForm from "components/ZipForm";
-
   import StoryCard2 from "components/StoryCard2";
+  import OrgBlock from "components/OrgBlock";
   import scrollLink from "mixins/scrollLink";
   import { staticPath } from "config/static";
   import ScrollOver from "components/ScrollOver";
@@ -159,27 +159,7 @@
       </ul>
     </div>
 
-    <div
-      style="flex: 0 0 500px; border-radius: 16px;"
-      class="flex flex-col items-center border-2 border-c-border-3 lg:ml-16
-      justify-center p-12 text-lg mt-16 lg:mt-0 jason-round">
-      <img
-        alt="Color of Change Logo"
-        class="w-48"
-        src="{staticPath}/color_of_change_logo.png" />
-
-      <p class="self-stretch text-center my-8 mx-auto">
-        Color Of Change is the nation’s largest online racial justice
-        organization.
-      </p>
-
-      <p class="self-stretch text-center mx-auto">
-        They help people respond effectively to injustice in the world around
-        us. As a national online force driven by 1.7 million members, they move
-        decision-makers in corporations and government to create a more human
-        and less hostile world for Black people in America.
-      </p>
-    </div>
+    <OrgBlock />
   </div>
 
   <div class="contained hero-container mb-24">
