@@ -1,0 +1,72 @@
+body {
+  font-family: stratos;
+}
+
+input:active,
+input:focus {
+  outline: none;
+}
+
+:root {
+  --color-brownWhite: #fffdfb;
+  --color-brownGray: #94837b;
+  --color-brown: #331e0f;
+  --color-offBlack: #131512;
+  --color-tan: #f2dbc0;
+  --color-twitter-light-gray: #e6ecf0;
+  --color-twitter-black: #15171a;
+  --color-twitter-dark-gray: #647787;
+  --color-twitter-blue: #1da1f2;
+  --color-twitter-link: #1996e0;
+  --color-twitter-lightest-gray: #fafafa;
+  --color-twitter-light-blue: #e2effa;
+
+  --c-button-primary: var(--color-brown);
+  --c-border-1: var(--color-brown);
+  --c-border-2: var(--color-brownGray);
+  --c-border-3: var(--color-tan);
+  --c-bg-primary: var(--color-brownWhite);
+  --c-bg-complement: var(--color-offBlack);
+  --c-header-1: var(--color-brownGray);
+  --c-text-1: var(--color-brown);
+  --c-header-1-complement: var(--color-brownWhite);
+  --c-text-1-complement: var(--color-brownWhite);
+
+  --c-border-twitter: var(--color-twitter-light-gray);
+  --c-text-twitter: var(--color-twitter-black);
+  --c-header-twitter: var(--color-twitter-dark-gray);
+  --c-button-twitter: var(--color-twitter-blue);
+  --c-bg-secondary-twitter: var(--color-twitter-lightest-gray);
+  --c-link-twitter: var(--color-twitter-link);
+  --c-link-2-twitter: var(--color-twitter-dark-gray);
+  --c-button-2-twitter: var(--color-twitter-light-blue);
+}
+
+body,
+html {
+  overflow-x: hidden;
+  position: relative;
+  background-color: var(--c-bg-primary);
+}
+
+@media only screen and (max-width: 768px) {
+  body,
+  html,
+  :root {
+    font-size: 12px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
