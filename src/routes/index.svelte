@@ -21,6 +21,10 @@
   };
 </script>
 
+<svelte:head>
+  <title>Fight for Black Lives</title>
+</svelte:head>
+
 <div id="enter-your-zip-code" class="flex flex-col flex-1 self-stretch">
   <hr
     style="height: 4px"

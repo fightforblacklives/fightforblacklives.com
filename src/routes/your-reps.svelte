@@ -20,13 +20,8 @@
   };
 
   const loadNewZip = () => {
-    window.history.pushState(
-      {},
-      `Results for ${zipCode}`,
-      `${staticPath}/your-reps#${zipCode}`
-    );
-    getZipCode();
-    selectedPerson = null;
+    window.location.replace(`${staticPath}/your-reps#${zipCode}`);
+    window.location.reload();
   };
 
   let zipCode = process.browser ? window.location.hash.slice(1, 6) : null;
@@ -201,8 +196,18 @@
   });
 </script>
 
-{#if zipCodeBundle}
+<svelte:head>
+  {#if zipCodeBundle}
+    <title>
+      Fight for Black Lives - Elected Officials for {zipCodeBundle.city}, {zipCodeBundle.state}
+      {zipCode}
+    </title>
+  {:else}
+    <title>Fight for Black Lives</title>
+  {/if}
+</svelte:head>
 
+{#if zipCodeBundle}
   <div class="flex flex-col flex-1">
     <div class="flex flex-col mt-16 mb-24">
       <div class="flex contained">

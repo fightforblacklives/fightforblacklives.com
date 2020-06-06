@@ -44,7 +44,7 @@
 
   const getField = (swapped, swapping, profile, nextProfile, key) => {
     return swapping === false || !swapped.has(key)
-      ? profile[key]
+      ? profile[key] || "Unknown"
       : nextProfile[key];
   };
 
