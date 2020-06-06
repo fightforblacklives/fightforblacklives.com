@@ -2,6 +2,9 @@
   import Icon from "components/Icon";
   import { twitter, fasEnvelope, fasPhone } from "config/icons.ts";
 
+  export let featureTextClass = "text-base";
+  export let secondaryTextClass = "text-sm";
+
   const getParty = party => {
     if (party == null) {
       return "";
@@ -19,22 +22,26 @@
   export let person;
 </script>
 
-<div class="p-4 flex flex-col text-center items-center">
-  <h4 class="font-semibold">
-    {person.name}
-    <span class="font-normal">{getParty(person.party)}</span>
-  </h4>
-  <h3 class="text-sm">{person.title}</h3>
+<div class="flex flex-col {$$props.class || ''}">
+  <div class="flex font-semibold items-center ">
+    <h4 class="text-c-header-1 {featureTextClass}">
+      {person.name}
+      <span class="font-normal">{getParty(person.party)}</span>
+    </h4>
 
-  <div class="flex mt-3">
+  </div>
+
+  <h3 class={secondaryTextClass}>{person.title}</h3>
+
+  <div class="flex text-base text-c-header-1 mt-2">
     {#if person.twitter}
-      <Icon class="px-2" icon={twitter} />
+      <Icon class="pr-3" icon={twitter} />
     {/if}
     {#if person.phone}
-      <Icon class="px-2" icon={fasPhone} />
+      <Icon class="pr-3" icon={fasPhone} />
     {/if}
     {#if person.email}
-      <Icon class="px-2" icon={fasEnvelope} />
+      <Icon class="pr-3" icon={fasEnvelope} />
     {/if}
   </div>
 </div>

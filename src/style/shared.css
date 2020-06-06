@@ -3,25 +3,71 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-}
 
-@media only screen and (max-width: 1344px) {
-  .contained {
+  @media only screen and (max-width: 1344px) {
     @apply mx-8;
-    width: calc(100% - 64px);
+    width: calc(100vw - 64px);
+  }
+
+  @media only screen and (max-width: 768px) {
+    @apply mx-6;
+    width: calc(100vw - 48px);
   }
 }
 
-.contained-md {
-  @apply px-3;
-}
-
-@screen md {
-  .contained-md {
-    @apply px-6;
-    max-width: 1024px;
+.contained-md-down {
+  @media only screen and (max-width: 1024px) {
+    max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+
+    @media only screen and (max-width: 1344px) {
+      @apply mx-8;
+      width: calc(100vw - 64px);
+    }
+
+    @media only screen and (max-width: 768px) {
+      @apply mx-6;
+      width: calc(100vw - 48px);
+    }
+  }
+}
+
+.contained-sm {
+  @screen sm {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+    @media only screen and (max-width: 1344px) {
+      @apply mx-8;
+      width: calc(100vw - 64px);
+    }
+
+    @media only screen and (max-width: 768px) {
+      @apply mx-6;
+      width: calc(100vw - 48px);
+    }
+  }
+}
+
+.contained-lg {
+  @screen lg {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
+    @media only screen and (max-width: 1344px) {
+      @apply mx-8;
+      width: calc(100% - 64px);
+    }
+
+    @media only screen and (max-width: 768px) {
+      @apply mx-6;
+      width: calc(100vw - 48px);
+    }
   }
 }

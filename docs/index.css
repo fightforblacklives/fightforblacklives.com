@@ -146,7 +146,8 @@ input {
  */
 
 button,
-input { /* 1 */
+input {
+  /* 1 */
   overflow: visible;
 }
 
@@ -155,7 +156,8 @@ input { /* 1 */
  * 1. Remove the inheritance of text transform in Firefox.
  */
 
-button { /* 1 */
+button {
+  /* 1 */
   text-transform: none;
 }
 
@@ -282,7 +284,6 @@ button:-moz-focusring,
  * Removes the default spacing and border for appropriate elements.
  */
 
-
 h1,
 h2,
 h3,
@@ -311,7 +312,6 @@ button:focus {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
-
 ul {
   list-style: none;
   margin: 0;
@@ -330,7 +330,9 @@ ul {
  */
 
 html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -455,7 +457,8 @@ input {
 
 pre,
 code {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 }
 
 /**
@@ -884,7 +887,7 @@ img {
 
 .object-cover {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .opacity-0 {
@@ -1028,7 +1031,8 @@ img {
 }
 
 .shadow-lg {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .text-left {
@@ -1087,9 +1091,9 @@ img {
 
 .select-none {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .visible {
@@ -1136,11 +1140,15 @@ img {
   --transform-skew-y: 0;
   --transform-scale-x: 1;
   --transform-scale-y: 1;
-  transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  transform: translateX(var(--transform-translate-x))
+    translateY(var(--transform-translate-y)) rotate(var(--transform-rotate))
+    skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y))
+    scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
 }
 
 .transition {
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
 }
 
 .transition-colors {
@@ -1148,7 +1156,6 @@ img {
 }
 
 @media (min-width: 640px) {
-
   .sm\:border-0 {
     border-width: 0;
   }
@@ -1215,7 +1222,6 @@ img {
 }
 
 @media (min-width: 768px) {
-
   .md\:block {
     display: block;
   }
@@ -1238,7 +1244,6 @@ img {
 }
 
 @media (min-width: 1024px) {
-
   .lg\:flex-row {
     flex-direction: row;
   }
@@ -1278,9 +1283,7 @@ img {
 }
 
 @media (min-width: 1280px) {
-
   .xl\:text-4xl {
     font-size: 2.25rem;
   }
 }
-  

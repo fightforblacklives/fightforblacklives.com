@@ -10,6 +10,7 @@
     fasEnvelope,
     fasPhone,
     facebook,
+    fasAngleRight,
     fasUser
   } from "config/icons.ts";
 
@@ -100,7 +101,6 @@
   let lastPerson;
   let nextPerson;
   let selectedPerson;
-  let dropdownSize = 500;
 
   const selectCard = async (e, person) => {
     if (selectedPerson === person.id) {
@@ -180,6 +180,15 @@
   };
 
   let cardWidth;
+  let windowWidth;
+  let windowHeight;
+
+  $: dropdownSize =
+    windowWidth < 640
+      ? windowHeight - 110
+      : windowWidth < 1024
+      ? windowHeight - cardWidth - 100
+      : 500;
 
   onMount(() => {
     getZipCode();
@@ -196,6 +205,8 @@
     <title>Fight for Black Lives</title>
   {/if}
 </svelte:head>
+
+<svelte:window bind:innerHeight={windowHeight} bind:innerWidth={windowWidth} />
 
 {#if zipCodeBundle}
   <div class="flex flex-col flex-1">
@@ -223,9 +234,12 @@
       <span class="contained text-lg pt-2 text-c-header-1">Zip Code</span>
     </div>
 
-    <ul bind:this={gridEl} class="grid sm:contained mb-24">
-      {#each zipCodeBundle.people as person (person.id)}
-        <li class="card relative sm:self-start flex flex-col">
+    <ul bind:this={gridEl} class="grid contained-sm mb-24">
+      {#each zipCodeBundle.people as person, i (person.id)}
+        <li
+          class:border-t={i === 0}
+          class="card relative sm:self-start flex flex-col border-b
+          border-c-border-3 lg:border-b-0 lg:border-t-0">
           <div
             on:click={e => selectCard(e, person)}
             style="transition: box-shadow {(animationDuration / 1000).toFixed(4)}s;
@@ -236,24 +250,53 @@
             <div class="flex flex-1 items-center justify-center">
               {#if person.image}
                 <img
-                  style="width: {0.5 * cardWidth}px; height: {0.5 * cardWidth}px"
-                  class="card-image object-cover rounded-full mx-auto"
+                  style="width: {0.4 * cardWidth}px; height: {0.4 * cardWidth}px"
+                  class="card-image object-cover rounded-full mx-auto border-2
+                  border-c-border-3"
                   alt="Portrait of {person.name}"
                   src={person.image.startsWith('http://') ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(person.image)}` : person.image} />
               {:else}
                 <div
-                  class="w-40 h-40 border-2 border-c-border-3 flex flex-col
-                  items-center justify-center rounded-full mx-auto">
+                  style="width: {0.4 * cardWidth}px; height: {0.4 * cardWidth}px"
+                  class="border-2 border-c-border-3 flex flex-col items-center
+                  justify-center rounded-full mx-auto">
                   <Icon icon={fasUser} class="text-5xl text-c-header-1" />
                 </div>
               {/if}
             </div>
 
-            <RepCardInfo {person} />
+            <RepCardInfo class="text-center items-center p-4" {person} />
           </div>
 
-          <div class="card-content flex sm:hidden border-t-2 border-c-border-3">
-            <RepCardInfo {person} />
+          <div
+            on:click={e => selectCard(e, person)}
+            class="card-content flex flex-col sm:hidden py-5">
+            <div class="flex contained items-center">
+              {#if person.image}
+                <img
+                  class="card-image object-cover rounded-full mx-auto w-20 h-20
+                  border-2 border-c-border-3"
+                  alt="Portrait of {person.name}"
+                  src={person.image.startsWith('http://') ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(person.image)}` : person.image} />
+              {:else}
+                <div
+                  class="w-20 h-20 border-2 border-c-border-3 flex flex-col
+                  items-center justify-center rounded-full mx-auto">
+                  <Icon icon={fasUser} class="text-5xl text-c-header-1" />
+                </div>
+              {/if}
+
+              <RepCardInfo
+                class="flex-1 text-left items-stretch pl-6"
+                featureTextClass="text-xl"
+                secondaryTextClass="text-lg"
+                {person} />
+
+              <Icon
+                style="transition: transform 0.25s; transform: {selectedPerson == person.id ? 'rotate(90deg)' : 'rotate(0deg)'}"
+                class="text-2xl text-c-header-1"
+                icon={fasAngleRight} />
+            </div>
           </div>
 
           {#if selectedPerson === person.id}
@@ -276,17 +319,20 @@
 <style>
   @import "../style/shared.css";
 
+  .card {
+    border-width: 0 !important;
+  }
+
   .grid {
     @apply flex flex-col;
-    max-width: none;
 
-    @media only screen and (max-width: 1344px) {
+    @media only screen and (max-width: 1344px) and (min-width: 640px) {
       max-width: calc(100vw - 64px);
     }
 
     @screen sm {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 32px;
     }
   }

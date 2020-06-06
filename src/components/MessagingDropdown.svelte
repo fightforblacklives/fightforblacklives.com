@@ -6,7 +6,8 @@
     fasAt,
     fasEnvelope,
     fasPhone,
-    facebook
+    facebook,
+    fasAngleRight
   } from "config/icons.ts";
   import { fade, fly } from "svelte/transition";
   import { delay } from "utils/time";
@@ -116,7 +117,7 @@
       css: t =>
         `height: ${t * height}px; opacity: ${t}; overflow: ${
           t === 1 ? "visible" : "hidden"
-        };`
+        }; transition: none;`
     };
   };
 
@@ -134,13 +135,21 @@
     return rect.x + rect.width / 2;
   };
 
-  onMount(async () => {
+  const onResize = () => {
     const parentRect = el.parentElement.getBoundingClientRect();
     offset = parentRect.x;
+  };
+
+  onMount(async () => {
+    onResize();
 
     if (transition.type === "collapse-expand") {
-      await delay(transition.duration);
+      await new Promise(resolve => {
+        introResolve = resolve;
+      });
     }
+
+    const parentRect = el.parentElement.getBoundingClientRect();
 
     const elRect = el.getBoundingClientRect();
     const bodyRect = document.body.getBoundingClientRect();
@@ -148,10 +157,11 @@
     const bottomScreen = window.innerHeight - bodyRect.y;
     const topOfEl = elRect.y - bodyRect.y;
     const bottomOfMessage = topOfEl + height;
+    const topOfParent = parentRect.y - bodyRect.y;
 
-    if (bottomScreen < bottomOfMessage) {
+    if (window.innerWidth < 1024 || bottomScreen < bottomOfMessage) {
       window.scroll({
-        top: window.scrollY + (bottomOfMessage - bottomScreen) + 100,
+        top: topOfParent - (window.innerWidth < 1024 ? 0 : 100),
         behavior: "smooth"
       });
     }
@@ -191,6 +201,7 @@
   }
 
   let navEl;
+  let infoOpen = false;
 
   const getRectStyle = rect => {
     return `
@@ -200,6 +211,8 @@
     height: ${rect.height}px;
     `;
   };
+
+  let introResolve;
 
   $: topicActiveButtonRect =
     currentTopic &&
@@ -215,39 +228,42 @@
   const twitterFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif`;
 </script>
 
+<svelte:window on:resize={onResize} />
+
 <div
   bind:this={el}
   style="margin-bottom: {height}px; height: 0px;"
   in:placeholder={{ height, transition }}
+  on:introend={introResolve}
   out:placeholder={{ height, transition }}>
-  {#if offset}
+  {#if offset !== false}
     <div class="absolute arrow-anchor w-full" bind:this={arrowAnchor} />
     <div
-      style="height: {height}px; left: -{offset + 1}px;"
+      style="height: {height}px; left: -{offset}px; transition: height 0.2s;"
       in:scale={{ transition }}
       out:scale={{ transition }}
-      class="absolute box top-full w-screen flex flex-col pt-6">
-
+      class="absolute box top-full w-screen flex flex-col sm:pt-6">
       {#if arrowRect}
         <div
           in:arrowTransitionEnter={{ transition, arrowRect, lastArrowRect }}
           out:arrowTransitionExit={{ transition }}
-          class="absolute arrow -z-5"
+          class="absolute arrow -z-5 hidden sm:block"
           style="left: {arrowPosition(arrowRect)}px;" />
       {/if}
 
       <div
         style="max-height: 100%"
-        class="flex bg-c-bg-primary border-t-2 border-b-2 border-c-border-3
-        flex-1">
+        class="flex bg-c-bg-primary sm:border-t-2 sm:border-b-2
+        border-c-border-3 flex-1 relative">
         <div
-          class="contained flex flex-1 z-50"
+          class="contained-lg flex-col lg:flex-row flex flex-1 z-50"
           in:swap={{ transition }}
           out:swap={{ transition }}>
           {#if person.twitter != null}
             <nav
               bind:this={navEl}
-              class="flex flex-col items-start mt-4 relative">
+              class="contained-md-down flex flex lg:flex-col items-start mt-4
+              relative pb-4 lg:mb-0">
               {#if topicActiveButtonRect}
                 <div
                   style="{getRectStyle(padRect(topicActiveButtonRect, 12, 4))};
@@ -259,7 +275,8 @@
                 <button
                   data-topic={topic}
                   on:click={() => selectTopic(topic)}
-                  class="rounded-full mb-4 text-left z-20">
+                  class="rounded-full mr-8 lg:mr-0 lg:mb-4 text-left z-20
+                  whitespace-no-wrap">
                   {topic}
                 </button>
               {/each}
@@ -273,8 +290,9 @@
               out:hideOverflowOnTransition={{ transition }}
               style="font-family: {twitterFont};"
               class="flex bg-white flex-col border-l border-r
-              border-c-border-twitter flex-1 overflow-y-auto max-h-full
-              text-c-text-twitter mx-10">
+              lg:border-c-border-twitter flex-1 overflow-y-auto max-h-full
+              text-c-text-twitter lg:mx-10 lg:border-t-0 border-t
+              border-c-border-3">
               {#each tweets as topicGroup (topicGroup.topic)}
                 <li
                   data-topic={topicGroup.topic}
@@ -284,7 +302,8 @@
                 </li>
                 {#each topicGroup.tweets as tweet, i}
                   <li
-                    style="transition: background-color 0.25s;"
+                    style="transition: background-color 0.25s; flex-grow: 0;
+                    flex-shrink: 0;"
                     class="border-b border-c-border-twitter flex flex-col
                     cursor-pointer hover:bg-c-bg-secondary-twitter">
                     <a
@@ -344,43 +363,56 @@
             </div>
           {/if}
 
-          <div
-            style="max-width: 375px; min-width: 300px; flex: 0;"
-            class="pt-6">
-            <h2 class="text-2xl font-semibold">{person.name}</h2>
-            <h3 class="text-2xl">{person.title}</h3>
-            <h4 class="text-lg mt-4">{person.party}</h4>
-            {#if person.address}
-              <h5 class="detail-header">Office Address</h5>
-              <span class="detail">{person.address}</span>
-            {/if}
-            {#if person.phone}
-              <h5 class="detail-header">Phone Number</h5>
-              <a href={`tel:${person.phone}`}>
+          <div class="contact-info-section flex flex-col sticky bottom-0">
+            <button
+              on:click={() => (infoOpen = !infoOpen)}
+              style="background-color: #F6E4D2"
+              class="lg:hidden py-4 border-t border-c-border-3 block">
+              <span class="block contained text-lg flex items-center">
+                Contact Information
+                <Icon
+                  class="mt-1 ml-auto text-2xl text-c-header-1"
+                  style="transition: transform 0.25s; transform: {infoOpen ? 'rotate(90deg)' : 'rotate(0deg)'}"
+                  icon={fasAngleRight} />
+              </span>
+            </button>
 
-                <span class="detail">{person.phone}</span>
-              </a>
-            {/if}
-            {#if person.email}
-              <h5 class="detail-header">Email</h5>
-              <a href={`mailto:${person.email}`}>
-
-                <span class="detail">{person.email}</span>
-              </a>
-            {/if}
-
-            <div class="flex flex-row mt-4">
-              {#if person.twitter}
-                <a href={`https://twitter.com/${person.twitter}`}>
-                  <Icon size="lg" class="px-1" icon={twitter} />
+            <div
+              class="py-6 lg:pb-0 contained-md-down {infoOpen ? 'hidden' : ''}
+              sm:block">
+              <h2 class="text-2xl font-semibold">{person.name}</h2>
+              <h3 class="text-2xl">{person.title}</h3>
+              <h4 class="text-lg mt-4">{person.party}</h4>
+              {#if person.address}
+                <h5 class="detail-header">Office Address</h5>
+                <span class="detail">{person.address}</span>
+              {/if}
+              {#if person.phone}
+                <h5 class="detail-header">Phone Number</h5>
+                <a href={`tel:${person.phone}`}>
+                  <span class="detail">{person.phone}</span>
                 </a>
               {/if}
-              {#if person.facebook}
-                <a href={`https://facebook.com/${person.facebook}`}>
-                  <Icon size="lg" class="px-1" icon={facebook} />
+              {#if person.email}
+                <h5 class="detail-header">Email</h5>
+                <a href={`mailto:${person.email}`}>
+                  <span class="detail">{person.email}</span>
                 </a>
               {/if}
 
+              <div class="flex flex-row mt-4">
+                {#if person.twitter}
+                  <a href={`https://twitter.com/${person.twitter}`}>
+                    <Icon size="lg" class="px-1" icon={twitter} />
+                  </a>
+                {/if}
+                {#if person.facebook}
+                  <a href={`https://facebook.com/${person.facebook}`}>
+                    <Icon size="lg" class="px-1" icon={facebook} />
+                  </a>
+                {/if}
+
+              </div>
             </div>
 
           </div>
@@ -402,7 +434,7 @@
   }
 
   .arrow {
-    @apply block absolute;
+    @apply absolute;
     width: 0;
     height: 0;
     border-style: solid;
@@ -414,5 +446,13 @@
 
   .transition-colors {
     transition: background-color 0.25s, color 0.25s;
+  }
+
+  .contact-info-section {
+    @screen lg {
+      max-width: 375px;
+      min-width: 300px;
+      flex: 0;
+    }
   }
 </style>

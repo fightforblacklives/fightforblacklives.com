@@ -5,3 +5,5 @@ export { faEnvelope as fasEnvelope } from "@fortawesome/pro-solid-svg-icons/faEn
 export { faPhone as fasPhone } from "@fortawesome/pro-solid-svg-icons/faPhone";
 export { faUser as fasUser } from "@fortawesome/pro-solid-svg-icons/faUser";
 export { faAt as fasAt } from "@fortawesome/pro-solid-svg-icons/faAt";
+export { faAngleRight as fasAngleRight } from "@fortawesome/pro-solid-svg-icons/faAngleRight";
+export { faAngleLeft as fasAngleLeft } from "@fortawesome/pro-solid-svg-icons/faAngleLeft";
