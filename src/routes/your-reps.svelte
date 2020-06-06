@@ -31,13 +31,13 @@
   let lastArrowRect = null;
 
   let topics = [
+    "Reduced Police Funding",
     "Police Accountability",
     "Use of Force",
     "Policing for Profit",
     "Invest in Community",
     "Mental Health",
-    "Broken Windows Policing",
-    "Defund the Police"
+    "Broken Windows Policing"
   ];
 
   let testTweets = [

@@ -23,7 +23,8 @@
       <div
         class="flex flex-col underline text-left mt-6 sm:mt-0 sm:text-right
         sm:justify-end sm:flex-row sm:flex-wrap org-list">
-        <a href="https://www.joincampaignzero.org/">Campaign Zero</a>
+        <a href="https://www.joincampaignzero.org/">Reclaim the Block</a>
+        <a href="https://www.reclaimtheblock.org">Campaign Zero</a>
         <a href="https://colorofchange.org/">Color of Change</a>
         <a href="https://blacklivesmatter.com/">Black Lives Matter</a>
         <a href="https://minnesotafreedomfund.org/">Minnesota Freedom Fund</a>
@@ -99,7 +100,7 @@
 
   .org-list {
     @apply -mx-4;
-    max-width: 450px;
+    max-width: 500px;
 
     & > a {
       @apply mx-4 mb-4;
