@@ -32,7 +32,7 @@
   let lastArrowRect = null;
 
   let topics = [
-    "Reduced Police Funding",
+    "Reduce Police Funding",
     "Police Accountability",
     "Use of Force",
     "Policing for Profit",
@@ -44,48 +44,22 @@
   let testTweets = [
     {
       id: "test2",
-      topic: "Police Accountability",
-      text: "This is my text. This is not long."
+      text: "Help us wright impactful tweets!"
     },
 
     {
-      id: "test1",
-      topic: "Police Accountability",
-      text:
-        "This tweet is longer and more interisting with more #hashtags and squiggles."
+      id: "test3",
+      text: "Help us wright impactful tweets!"
     },
 
     {
       id: "test4",
-      topic: "Use of Force",
-      text:
-        "This tweet is longer and more interisting with more #hashtags and squiggles."
+      text: "Help us wright impactful tweets!"
     },
+
     {
       id: "test5",
-      topic: "Policing for Profit",
-      text:
-        "This tweet is longer and more interisting with more #hashtags and squiggles."
-    },
-    {
-      id: "test6",
-      topic: "Invest in Community",
-      text:
-        "This tweet is longer and more interisting with more #hashtags and squiggles."
-    },
-
-    {
-      id: "test7",
-      topic: "Mental Health",
-      text:
-        "This tweet is longer and more interisting with more #hashtags and squiggles."
-    },
-
-    {
-      id: "test7",
-      topic: "Broken Windows Policing",
-      text:
-        "This tweet is longer and more interisting with more #hashtags and squiggles."
+      text: "Help us wright impactful tweets!"
     }
   ];
 

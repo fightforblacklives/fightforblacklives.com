@@ -16,6 +16,7 @@
   import scrollSectionReporter from "mixins/scrollSectionReporter";
   import { relativeRect, padRect } from "utils/math";
   import AddTwitterAccount from "components/AddTwitterAccount";
+  import swipe from "mixins/swipe";
 
   const fire = createEventDispatcher();
 
@@ -226,7 +227,27 @@
         )
         .getBoundingClientRect()
     );
+
   const twitterFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif`;
+
+  let buttonNavScroller;
+  $: {
+    if (buttonNavScroller && topicActiveButtonRect) {
+      const destMiddle =
+        topicActiveButtonRect.left + topicActiveButtonRect.width / 2;
+      const destScrollLeft =
+        destMiddle - buttonNavScroller.getBoundingClientRect().width / 2;
+      console.log(destMiddle, destScrollLeft);
+
+      buttonNavScroller.scroll({ left: destScrollLeft, behavior: "smooth" });
+    }
+  }
+
+  const swipeMove = e => {
+    if (buttonNavScroller) {
+      buttonNavScroller.scrollLeft -= e.detail.dx;
+    }
+  };
 </script>
 
 <svelte:window on:resize={onResize} />
@@ -261,27 +282,35 @@
           in:swap={{ transition }}
           out:swap={{ transition }}>
           {#if person.twitter != null}
-            <nav
-              bind:this={navEl}
-              class="contained-md-down flex flex lg:flex-col items-start mt-4
-              relative pb-4 lg:mb-0">
-              {#if topicActiveButtonRect}
-                <div
-                  style="{getRectStyle(padRect(topicActiveButtonRect, 12, 4))};
-                  transition: width 0.2s, height 0.2s, left 0.2s, top 0.2s;
-                  background-color: rgba(242, 219, 192, 0.7);"
-                  class="active-indicator absolute rounded-full z-10" />
-              {/if}
-              {#each topics as topic (topic)}
-                <button
-                  data-topic={topic}
-                  on:click={() => selectTopic(topic)}
-                  class="rounded-full mr-8 lg:mr-0 lg:mb-4 text-left z-20
-                  whitespace-no-wrap">
-                  {topic}
-                </button>
-              {/each}
-            </nav>
+            <div
+              use:swipe
+              on:swipeMove={swipeMove}
+              bind:this={buttonNavScroller}
+              style="max-width: 100vw;"
+              class="overflow-hidden lg:overflow-visible">
+              <nav
+                bind:this={navEl}
+                class="px-8 lg:px-0 inline-flex lg:flex-col items-start mt-4
+                relative pb-4 lg:mb-0">
+                {#if topicActiveButtonRect}
+                  <div
+                    style="{getRectStyle(padRect(topicActiveButtonRect, 12, 4))};
+                    transition: width 0.2s, height 0.2s, left 0.2s, top 0.2s;
+                    background-color: rgba(242, 219, 192, 0.7);"
+                    class="active-indicator absolute rounded-full z-10" />
+                {/if}
+                {#each topics as topic (topic)}
+                  <button
+                    data-topic={topic}
+                    on:click={() => selectTopic(topic)}
+                    style="flex-grow: 0; flex-shrink: 0;"
+                    class="rounded-full mr-8 lg:mr-0 lg:mb-4 text-left z-20
+                    whitespace-no-wrap">
+                    {topic}
+                  </button>
+                {/each}
+              </nav>
+            </div>
 
             <ul
               bind:this={tweetScroller}
@@ -380,7 +409,7 @@
 
             <div
               class="py-6 lg:pb-0 contained-md-down {infoOpen ? '' : 'hidden'}
-              sm:block">
+              lg:block">
               <h2 class="text-2xl font-semibold">{person.name}</h2>
               <h3 class="text-2xl">{person.title}</h3>
               <h4 class="text-lg mt-4">{person.party}</h4>
