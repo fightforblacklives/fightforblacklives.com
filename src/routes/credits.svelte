@@ -2,7 +2,7 @@
   <title>Fight for Black Lives | Credits</title>
 </svelte:head>
 
-<div class="contained">
+<div class="contained mb-4">
 
   <h1 class="text-c-header-1 text-4xl mb-4">Credits</h1>
   <p>

@@ -37,7 +37,7 @@
   <span
     class="inline-block"
     on:introend={introResolve}
-    transition:fly={{ duration, y: -20 }}>
+    in:fly={{ duration, y: -20 }}>
     {text}
   </span>
 {/if}
