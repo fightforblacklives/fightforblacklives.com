@@ -170,7 +170,7 @@
   });
 
   let tweetScroller;
-  const selectTopic = newTopic => {
+  const selectTopic = async newTopic => {
     if (tweetScroller) {
       const el = tweetScroller.querySelector(
         `:scope > li[data-topic=${JSON.stringify(newTopic)}]`
@@ -184,7 +184,40 @@
           top: tweetScroller.scrollTop + (elRect.top - scrollerRect.top),
           behavior: "smooth"
         });
+
+        await delay(500);
+
+        if (buttonNavScroller && topicActiveButtonRect) {
+          const destMiddle =
+            topicActiveButtonRect.left + topicActiveButtonRect.width / 2;
+          const destScrollLeft =
+            destMiddle - buttonNavScroller.getBoundingClientRect().width / 2;
+          console.log(destMiddle, destScrollLeft);
+
+          buttonNavScroller.scroll({
+            left: destScrollLeft,
+            behavior: "smooth"
+          });
+        }
       }
+    }
+  };
+
+  const updateTopicScrolled = async e => {
+    currentTopic = e.detail;
+    await delay(500);
+
+    if (buttonNavScroller && topicActiveButtonRect) {
+      const destMiddle =
+        topicActiveButtonRect.left + topicActiveButtonRect.width / 2;
+      const destScrollLeft =
+        destMiddle - buttonNavScroller.getBoundingClientRect().width / 2;
+      console.log(destMiddle, destScrollLeft);
+
+      buttonNavScroller.scroll({
+        left: destScrollLeft,
+        behavior: "smooth"
+      });
     }
   };
 
@@ -231,17 +264,6 @@
   const twitterFont = `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif`;
 
   let buttonNavScroller;
-  $: {
-    if (buttonNavScroller && topicActiveButtonRect) {
-      const destMiddle =
-        topicActiveButtonRect.left + topicActiveButtonRect.width / 2;
-      const destScrollLeft =
-        destMiddle - buttonNavScroller.getBoundingClientRect().width / 2;
-      console.log(destMiddle, destScrollLeft);
-
-      buttonNavScroller.scroll({ left: destScrollLeft, behavior: "smooth" });
-    }
-  }
 
   const swipeMove = e => {
     if (buttonNavScroller) {
@@ -315,7 +337,7 @@
             <ul
               bind:this={tweetScroller}
               use:scrollSectionReporter={{ itemData: 'topic', selector: ':scope > .topic-header', offsetTop: 200 }}
-              on:updateScrollSection={e => (currentTopic = e.detail)}
+              on:updateScrollSection={updateTopicScrolled}
               in:hideOverflowOnTransition={{ transition }}
               out:hideOverflowOnTransition={{ transition }}
               style="font-family: {twitterFont};"
