@@ -107,7 +107,7 @@
 
         <p class="section-text">
           We must
-          <span class="font-semibold">Fight For Black Lives</span>
+          <span class="font-semibold">Fight For Black Lives.</span>
         </p>
       </div>
 
