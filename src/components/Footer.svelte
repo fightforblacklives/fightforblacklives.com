@@ -7,7 +7,22 @@
   let bottomLinks = [
     { url: "/privacy", name: "Privacy Policy" },
     { url: "/credits", name: "Credits" },
-    { url: "/contact", name: "Contact" }
+    { url: "mailto:contact@fightforblacklives.com", name: "Contact" }
+  ];
+
+  let orgLinks = [
+    { url: "https://www.reclaimtheblock.org", name: "Reclaim the Block" },
+    { url: "https://www.joincampaignzero.org/", name: "Campaign Zero " },
+    { url: "https://colorofchange.org/", name: "Color of Change" },
+    { url: "https://blacklivesmatter.com/", name: "Black Lives Matter" },
+    {
+      url: "https://minnesotafreedomfund.org/",
+      name: "Minnesota Freedom Fund"
+    },
+    {
+      url: "https://www.nlg.org/massdefenseprogram/",
+      name: "National Lawyers Guild Mass Defense Fund"
+    }
   ];
 </script>
 
@@ -23,14 +38,9 @@
       <div
         class="flex flex-col underline text-left mt-6 sm:mt-0 sm:text-right
         sm:justify-end sm:flex-row sm:flex-wrap org-list">
-        <a href="https://www.joincampaignzero.org/">Reclaim the Block</a>
-        <a href="https://www.reclaimtheblock.org">Campaign Zero</a>
-        <a href="https://colorofchange.org/">Color of Change</a>
-        <a href="https://blacklivesmatter.com/">Black Lives Matter</a>
-        <a href="https://minnesotafreedomfund.org/">Minnesota Freedom Fund</a>
-        <a href="https://www.nlg.org/massdefenseprogram/">
-          National Lawyers Guild Mass Defense Fund
-        </a>
+        {#each orgLinks as link}
+          <a href={link.url}>{link.name}</a>
+        {/each}
       </div>
     </div>
 
@@ -48,6 +58,7 @@
           href="https://twitter.com/fight4blacklife">
           <Icon icon={twitter} class="text-5xl " />
         </a>
+
       </div>
     </div>
 
