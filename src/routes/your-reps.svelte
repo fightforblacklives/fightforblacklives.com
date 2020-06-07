@@ -44,22 +44,22 @@
   let testTweets = [
     {
       id: "test2",
-      text: "Help us wright impactful tweets!"
+      text: "Help us write impactful tweets!"
     },
 
     {
       id: "test3",
-      text: "Help us wright impactful tweets!"
+      text: "Help us write impactful tweets!"
     },
 
     {
       id: "test4",
-      text: "Help us wright impactful tweets!"
+      text: "Help us write impactful tweets!"
     },
 
     {
       id: "test5",
-      text: "Help us wright impactful tweets!"
+      text: "Help us write impactful tweets!"
     }
   ];
 
