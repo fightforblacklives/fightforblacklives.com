@@ -7,6 +7,8 @@ const makeColors = (colors) => {
 };
 
 module.exports = {
+  purge: ["./src/**/*.svelte", "./src/**/*.html"],
+
   theme: {
     fontFamily: {
       serif: ["serif"],

@@ -484,6 +484,10 @@ img {
   height: auto;
 }
 
+/*tailwind start components */
+
+/*tailwind end components */
+
 .bg-transparent {
   background-color: transparent;
 }
@@ -594,10 +598,6 @@ img {
 
 .inline-block {
   display: inline-block;
-}
-
-.inline {
-  display: inline;
 }
 
 .flex {
@@ -757,11 +757,6 @@ img {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
-}
-
-.-mx-4 {
-  margin-left: -1rem;
-  margin-right: -1rem;
 }
 
 .mt-1 {
@@ -1009,10 +1004,6 @@ img {
   padding-left: 1.5rem;
 }
 
-.pt-12 {
-  padding-top: 3rem;
-}
-
 .pl-16 {
   padding-left: 4rem;
 }
@@ -1064,10 +1055,6 @@ img {
   color: var(--c-header-1);
 }
 
-.text-c-text-1 {
-  color: var(--c-text-1);
-}
-
 .text-c-text-1-complement {
   color: var(--c-text-1-complement);
 }
@@ -1078,10 +1065,6 @@ img {
 
 .text-c-header-twitter {
   color: var(--c-header-twitter);
-}
-
-.text-c-link-twitter {
-  color: var(--c-link-twitter);
 }
 
 .text-c-link-2-twitter {
@@ -1159,7 +1142,6 @@ img {
 }
 
 @media (min-width: 640px) {
-
   .sm\:border-0 {
     border-width: 0;
   }
@@ -1238,7 +1220,6 @@ img {
 }
 
 @media (min-width: 768px) {
-
   .md\:block {
     display: block;
   }
@@ -1265,7 +1246,6 @@ img {
 }
 
 @media (min-width: 1024px) {
-
   .lg\:border-c-border-twitter {
     border-color: var(--c-border-twitter);
   }
@@ -1359,7 +1339,6 @@ img {
 }
 
 @media (min-width: 1280px) {
-
   .xl\:text-4xl {
     font-size: 2.25rem;
   }
