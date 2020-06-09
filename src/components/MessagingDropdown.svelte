@@ -333,7 +333,7 @@
                     data-topic={topic}
                     on:click={() => selectTopic(topic)}
                     style="flex-grow: 0; flex-shrink: 0;"
-                    class="rounded-full mr-8 lg:mr-0 lg:mb-4 text-left z-20
+                    class="mr-8 lg:mr-0 lg:mb-4 text-left z-20
                     whitespace-no-wrap">
                     {topic}
                   </button>
