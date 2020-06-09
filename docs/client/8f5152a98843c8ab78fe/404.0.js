@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{192:function(n,t,o){"use strict";o.r(t);var s=o(0);function c(n){return window.location.href="/",[]}class e extends s.a{constructor(n){super(),Object(s.K)(this,n,c,null,s.X,{})}}t.default=e}}]);
