@@ -2,6 +2,7 @@
   import { getDataByAddress } from "utils/api";
   import { onMount, tick } from "svelte";
   import ZipHeader from "components/ZipHeader";
+  import Spinner from "components/Spinner";
   import { staticPath } from "config/static";
   import LoadImage from "components/LoadImage";
   import MessagingDropdown from "components/MessagingDropdown";
@@ -11,6 +12,7 @@
     twitter,
     fasEnvelope,
     fasPhone,
+    fasSearchLocation,
     facebook,
     fasAngleRight,
     fasUser,
@@ -18,9 +20,11 @@
 
   let animationDuration = 250;
   let gridEl;
+  let loading = true;
 
   const getZipCode = async () => {
     zipCodeBundle = await getDataByAddress(zipCode);
+    loading = false;
   };
 
   const loadNewZip = () => {
@@ -303,6 +307,21 @@
       {/each}
       <li bind:offsetWidth={cardWidth} />
     </ul>
+  </div>
+{:else}
+  <div class="flex flex-col">
+    <ZipHeader {zipCodeBundle} on:submit={() => loadNewZip()} bind:zipCode />
+    {#if loading}
+      <div class="contained flex flex-col">
+        <Spinner class="py-4 mx-auto" />
+      </div>
+    {:else}
+      <div class="contained flex flex-col text-center items-center">
+        <Icon class="text-6xl mb-8" icon={fasSearchLocation} />
+
+        <h5 class="text-3xl">Hm, we couldn't find this zip code.</h5>
+      </div>
+    {/if}
   </div>
 {/if}
 

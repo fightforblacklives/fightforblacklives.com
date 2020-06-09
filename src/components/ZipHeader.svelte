@@ -20,9 +20,11 @@
       }}
       bind:value={zipCode}
       class="text-4xl mr-auto bg-transparent" />
-    <h2 class="text-4xl text-c-header-1">
-      {zipCodeBundle.city}, {zipCodeBundle.state}
-    </h2>
+    {#if zipCodeBundle}
+      <h2 class="text-4xl text-c-header-1">
+        {zipCodeBundle.city}, {zipCodeBundle.state}
+      </h2>
+    {/if}
 
   </div>
 

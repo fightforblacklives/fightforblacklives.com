@@ -7,3 +7,5 @@ export { faUser as fasUser } from "@fortawesome/pro-solid-svg-icons/faUser";
 export { faAt as fasAt } from "@fortawesome/pro-solid-svg-icons/faAt";
 export { faAngleRight as fasAngleRight } from "@fortawesome/pro-solid-svg-icons/faAngleRight";
 export { faAngleLeft as fasAngleLeft } from "@fortawesome/pro-solid-svg-icons/faAngleLeft";
+export { faSpinnerThird as fasSpinnerThird } from "@fortawesome/pro-solid-svg-icons/faSpinnerThird";
+export { faSearchLocation as fasSearchLocation } from "@fortawesome/pro-solid-svg-icons/faSearchLocation";

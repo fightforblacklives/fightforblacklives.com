@@ -218,9 +218,7 @@
     }
   };
 
-  const getTweetLink = (person, tweet) => {
-    const tweetText = `@${person.twitter} ${tweet}`;
-
+  const getTweetLink = (tweetText) => {
     return `https://twitter.com/intent/tweet?text=${encodeURIComponent(
       tweetText
     )}`;
@@ -370,7 +368,7 @@
                     <a
                       class="flex flex-col"
                       target="_blank"
-                      href={getTweetLink(person, tweet.text)}>
+                      href={getTweetLink(buildMessage(tweet))}>
                       <div class="flex p-4">
                         <img
                           class="bg-c-button-2-twitter rounded-full p-2"

@@ -712,12 +712,20 @@ img {
   font-size: 1.5rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+}
+
 .text-4xl {
   font-size: 2.25rem;
 }
 
 .text-5xl {
   font-size: 3rem;
+}
+
+.text-6xl {
+  font-size: 4rem;
 }
 
 .m-1 {
@@ -805,6 +813,10 @@ img {
 
 .mr-8 {
   margin-right: 2rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .mr-10 {
@@ -1053,6 +1065,10 @@ img {
 
 .text-c-header-1 {
   color: var(--c-header-1);
+}
+
+.text-c-text-1 {
+  color: var(--c-text-1);
 }
 
 .text-c-text-1-complement {
