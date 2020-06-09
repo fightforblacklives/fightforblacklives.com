@@ -12,6 +12,11 @@ input:focus {
   outline: none;
 }
 
+a:active,
+a:focus {
+  outline: none;
+}
+
 :root {
   --color-brownWhite: #fffdfb;
   --color-brownGray: #94837b;

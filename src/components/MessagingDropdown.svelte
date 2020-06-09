@@ -235,6 +235,18 @@
   let navEl;
   let infoOpen = false;
 
+  const buildMessage = (tweet) => {
+    const text = tweet.text.trim();
+    const withAt = `@${person.twitter} ${text}`;
+    const fightHashtag = " #fightforblacklives";
+
+    if (withAt.length <= 280 - fightHashtag.length) {
+      return withAt + fightHashtag;
+    }
+
+    return withAt;
+  };
+
   const getRectStyle = (rect) => {
     return `
     top: ${rect.top}px;
@@ -378,9 +390,7 @@
                             <span class="text-c-header-twitter">now</span>
                           </div>
 
-                          <TweetText
-                            class="pt-1"
-                            text={`@${person.twitter} ${tweet.text}`} />
+                          <TweetText class="pt-1" text={buildMessage(tweet)} />
 
                           <div class="pt-4">
                             <a

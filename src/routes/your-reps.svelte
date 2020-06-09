@@ -1,6 +1,7 @@
 <script>
   import { getDataByAddress } from "utils/api";
   import { onMount, tick } from "svelte";
+  import ZipHeader from "components/ZipHeader";
   import { staticPath } from "config/static";
   import LoadImage from "components/LoadImage";
   import MessagingDropdown from "components/MessagingDropdown";
@@ -42,32 +43,68 @@
     "Broken Windows Policing",
   ];
 
-  let testTweets = [
+  const tweetTopicsBase = [
     {
-      id: "test2",
-      text: "Help us write impactful tweets!",
+      topic: "Reduce Police Funding",
+      tweets: [
+        `When we look at police and how they're using their resources, it makes a clear case for reducing their budget, and then using those funds for social services, harm reduction & community-based public safety.\n\nReduce the budget for our police!`,
+        `The economic harm from the coronavirus pandemic can be reduced by taking money from the budget for police and reappropriating those funds to healthcare and social services.\n\nReduce the budget for our police!`,
+        `It is inappropriate to increase in our police department's budget. Our tax dollars continue to fund violence against Black and Brown people, as seen with #GeorgeFloyd, #BreonnaTaylor and many others before them, funding the police is not the solution for change.`,
+      ],
     },
 
     {
-      id: "test3",
-      text: "Help us write impactful tweets!",
+      topic: "Police Accountability",
+      tweets: [
+        `Establish a permanent Special Prosecutor's Office for cases of police violence. This office should be required to prosecute all cases where police kill or injure a civilian, in-custody deaths & cases where a civilian alleges criminal misconduct against an officer`,
+        `Remove barriers to reporting police misconduct! Require officers to give civilians their name, badge number, reason for the stop and a card with instructions for filing a complaint to a civilian oversight structure.\n\nIncrease accountability for our police!`,
+        `Communities need an urgent way to ensure police officers are held accountable for violence. Establish an all-civilian oversight structure with discipline power that includes a Police Commission and Civilian Complaints Office.\n\nMake police accountable!`,
+      ],
     },
 
     {
-      id: "test4",
-      text: "Help us write impactful tweets!",
+      topic: "Use of Force",
+      tweets: [
+        `Establish standards for reporting of police use of deadly force.\n\n1) Require reporting of police killings and serious injuries of civilians\n2) Require the names of both the officer(s) involved and victim(s) to be released within 72 hours of a deadly force incident.`,
+        `Set a standard to monitor how police use force and proactively hold officers accountable for excessive force. Make our police report all uses of force to a public database with information on injuries and victim demographics.`,
+        `Strengthen police use of force policies.\n\n1) Restrict officers from using deadly force unless all alternatives have been exhausted\n2) Ban using force on a person for talking back or running away\n3) Ban chokeholds & transporting people face down in a vehicle`,
+      ],
     },
 
     {
-      id: "test5",
-      text: "Help us write impactful tweets!",
+      topic: "Policing for Profit",
+      tweets: [
+        `End police department quotas for tickets and arrests. Ban police departments from using ticket or arrest quotas to evaluate the performance of police officers.\n\nEnd policing for profit!`,
+        `Require police departments to bear the cost of police misconduct. Require the cost of misconduct settlements to be paid from the police department budget instead of the City's general fund. When they go over-budget on lawsuit payments, don't give them more money`,
+        `Prevent police from taking money/property from innocent people. Prohibit seizing property of civilians unless they are convicted of a crime. Prohibit police from keeping any property that has legally been forfeited. This property should go to the city's budget`,
+        `Ban issuing fines for civilians who fail to appear in court for traffic violations. Ban generating more than 10% of total municipal revenue from fines & fees. Prohibit courts from ordering individuals on parole/probation to pay supervision and correctional fees.`,
+      ],
+    },
+    {
+      topic: "Invest in Community",
+      tweets: [
+        `Reallocate funds from policing and incarceration to long-term strategies for education, restorative justice services, and employment programs.\n\nInvest in our community, not cops!`,
+        `I urge you to move money out of policing, prisons, and the criminal legal system that are clearly steeped in racism–invest in a safe, liberated future by moving money into schools, healthcare, & transformative justice promoting well-being for our community.`,
+        `Use your power and my tax dollars to support healthy, stable communities that do not rely on imprisonment to reduce harm.\n\nInvest in our community, not cops!`,
+      ],
+    },
+
+    {
+      topic: "Broken Windows Policing",
+      tweets: [
+        `Decriminalize activities that pose no threat to public safety but are often used to police Black bodies: disorderly conduct, trespassing, loitering, marijuana possession, jaywalking, disturbing the peace, spitting, biking on the sidewalk & fare evasion.`,
+        `Establish enforceable protections against racial profiling and police interventions solely based on "suspicion" of one’s Blackness or other aspects of their identity.`,
+      ],
     },
   ];
 
-  let tweetTopics = topics.map((topic) => {
+  let tweetTopics = tweetTopicsBase.map((topic) => {
     return {
-      topic: topic,
-      tweets: testTweets,
+      topic: topic.topic,
+      tweets: topic.tweets.map((value, i) => ({
+        text: value,
+        id: topic + i,
+      })),
     };
   });
 
@@ -185,29 +222,7 @@
 
 {#if zipCodeBundle}
   <div class="flex flex-col flex-1">
-    <div class="flex flex-col mt-16 mb-24">
-      <div class="flex contained">
-        <input
-          pattern={'\\d*'}
-          maxlength="5"
-          style="max-width: 100px;"
-          on:keydown={(e) => {
-            if (e.key === 'Enter') {
-              loadNewZip();
-            }
-          }}
-          bind:value={zipCode}
-          class="text-4xl mr-auto bg-transparent" />
-        <h2 class="text-4xl text-c-header-1">
-          {zipCodeBundle.city}, {zipCodeBundle.state}
-        </h2>
-
-      </div>
-
-      <hr style="height: 1.5px" class="bg-c-border-2 contained" />
-
-      <span class="contained text-lg pt-2 text-c-header-1">Zip Code</span>
-    </div>
+    <ZipHeader {zipCodeBundle} on:submit={() => loadNewZip()} bind:zipCode />
 
     <ul bind:this={gridEl} class="grid contained-sm mb-24">
       {#each zipCodeBundle.people as person, i (person.id)}

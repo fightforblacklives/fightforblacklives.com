@@ -155,6 +155,11 @@ const resolveImage = (person: {
 
 export const getDataByAddress = async (zip) => {
   const googleCivicData = await googleCivicApi(zip + ", United States");
+
+  if (googleCivicData.error) {
+    return null;
+  }
+
   const addlData = await request(
     `https://d2jm68nhxp4m1b.cloudfront.net/zip-code-bundles/${zip}.jsonp?t=${Date.now()}`
   );
