@@ -35,16 +35,16 @@
 
   <div class="flex text-base text-c-header-1 mt-2 sm:pl-3">
     {#if person.twitter}
-      <Icon class="pr-3" icon={twitter} />
+      <Icon class="mr-3" icon={twitter} />
     {/if}
     {#if person.facebook}
-      <Icon class="pr-3" icon={facebook} />
+      <Icon class="mr-3" icon={facebook} />
     {/if}
     {#if person.phone}
-      <Icon class="pr-3" icon={fasPhone} />
+      <Icon class="mr-3" icon={fasPhone} />
     {/if}
     {#if person.email}
-      <Icon class="pr-3" icon={fasEnvelope} />
+      <Icon class="mr-3" icon={fasEnvelope} />
     {/if}
   </div>
 </div>
