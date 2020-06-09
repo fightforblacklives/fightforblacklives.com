@@ -2,6 +2,11 @@ body {
   font-family: stratos;
 }
 
+button:active,
+button:focus {
+  outline: none;
+}
+
 input:active,
 input:focus {
   outline: none;

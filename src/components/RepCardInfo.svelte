@@ -1,11 +1,11 @@
 <script>
   import Icon from "components/Icon";
-  import { twitter, fasEnvelope, fasPhone } from "config/icons.ts";
+  import { twitter, fasEnvelope, fasPhone, facebook } from "config/icons";
 
   export let featureTextClass = "text-base";
   export let secondaryTextClass = "text-sm";
 
-  const getParty = party => {
+  const getParty = (party) => {
     if (party == null) {
       return "";
     }
@@ -33,9 +33,12 @@
 
   <h3 class={secondaryTextClass}>{person.title}</h3>
 
-  <div class="flex text-base text-c-header-1 mt-2">
+  <div class="flex text-base text-c-header-1 mt-2 sm:pl-3">
     {#if person.twitter}
       <Icon class="pr-3" icon={twitter} />
+    {/if}
+    {#if person.facebook}
+      <Icon class="pr-3" icon={facebook} />
     {/if}
     {#if person.phone}
       <Icon class="pr-3" icon={fasPhone} />

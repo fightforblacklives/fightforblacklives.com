@@ -7,7 +7,7 @@
     fasEnvelope,
     fasPhone,
     facebook,
-    fasAngleRight
+    fasAngleRight,
   } from "config/icons.ts";
   import { fade, fly } from "svelte/transition";
   import { delay } from "utils/time";
@@ -30,14 +30,14 @@
 
   let arrowRect;
 
-  $: topics = Array.from(new Set(tweets.map(topicGroup => topicGroup.topic)));
+  $: topics = Array.from(new Set(tweets.map((topicGroup) => topicGroup.topic)));
 
   let currentTopic;
 
   let el;
   let arrowAnchor;
 
-  const getDefaultDuration = transition => {
+  const getDefaultDuration = (transition) => {
     if (transition === "none") {
       return 0;
     }
@@ -55,7 +55,7 @@
   ) => {
     if (lastArrowRect === null) {
       return {
-        duration: 0
+        duration: 0,
       };
     }
 
@@ -66,21 +66,21 @@
     return {
       duration:
         transition.type === "swap" && lastArrowRect ? transition.duration : 0,
-      css: t => `left: ${startX + t * delta}px`
+      css: (t) => `left: ${startX + t * delta}px`,
     };
   };
 
   const arrowTransitionExit = ({ transition }) => {
     return {
       duration: 0,
-      css: t => "opacity: 0"
+      css: (t) => "opacity: 0",
     };
   };
 
   const hideOverflowOnTransition = (e, { transition }) => {
     return {
       duration: getDefaultDuration(transition),
-      css: t => `overflow-y: ${t === 1 ? "auto" : "hidden"}`
+      css: (t) => `overflow-y: ${t === 1 ? "auto" : "hidden"}`,
     };
   };
 
@@ -88,7 +88,7 @@
     return {
       delay: 0,
       duration: getDefaultDuration(transition),
-      css: t => `margin-bottom: ${t * height}px;`
+      css: (t) => `margin-bottom: ${t * height}px;`,
     };
   };
 
@@ -96,29 +96,29 @@
     if (transition.type === "swap") {
       return fly(e, {
         duration: transition.duration,
-        x: transition.direction * -100
+        x: transition.direction * -100,
       });
     }
 
     return {
-      duration: 0
+      duration: 0,
     };
   };
 
   const scale = (e, { transition }) => {
     if (transition.type === "swap") {
       return {
-        duration: 0
+        duration: 0,
       };
     }
 
     return {
       delay: 0,
       duration: getDefaultDuration(transition),
-      css: t =>
+      css: (t) =>
         `height: ${t * height}px; opacity: ${t}; overflow: ${
           t === 1 ? "visible" : "hidden"
-        }; transition: none;`
+        }; transition: none;`,
     };
   };
 
@@ -128,7 +128,7 @@
     }
   }
 
-  const arrowPosition = rect => {
+  const arrowPosition = (rect) => {
     if (rect == null) {
       return 0;
     }
@@ -138,7 +138,6 @@
 
   const onResize = () => {
     const parentRect = el.parentElement.getBoundingClientRect();
-    console.log(parentRect);
     offset = parentRect.left;
   };
 
@@ -146,7 +145,7 @@
     onResize();
 
     if (transition.type === "collapse-expand") {
-      await new Promise(resolve => {
+      await new Promise((resolve) => {
         introResolve = resolve;
       });
     }
@@ -164,13 +163,13 @@
     if (window.innerWidth < 1024 || bottomScreen < bottomOfMessage) {
       window.scroll({
         top: topOfParent - (window.innerWidth < 1024 ? 0 : 100),
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   });
 
   let tweetScroller;
-  const selectTopic = async newTopic => {
+  const selectTopic = async (newTopic) => {
     if (tweetScroller) {
       const el = tweetScroller.querySelector(
         `:scope > li[data-topic=${JSON.stringify(newTopic)}]`
@@ -182,7 +181,7 @@
 
         tweetScroller.scroll({
           top: tweetScroller.scrollTop + (elRect.top - scrollerRect.top),
-          behavior: "smooth"
+          behavior: "smooth",
         });
 
         await delay(500);
@@ -196,14 +195,14 @@
 
           buttonNavScroller.scroll({
             left: destScrollLeft,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }
       }
     }
   };
 
-  const updateTopicScrolled = async e => {
+  const updateTopicScrolled = async (e) => {
     currentTopic = e.detail;
     await delay(500);
 
@@ -216,7 +215,7 @@
 
       buttonNavScroller.scroll({
         left: destScrollLeft,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };
@@ -238,7 +237,7 @@
   let navEl;
   let infoOpen = false;
 
-  const getRectStyle = rect => {
+  const getRectStyle = (rect) => {
     return `
     top: ${rect.top}px;
     left: ${rect.left}px;
@@ -265,7 +264,7 @@
 
   let buttonNavScroller;
 
-  const swipeMove = e => {
+  const swipeMove = (e) => {
     if (buttonNavScroller) {
       buttonNavScroller.scrollLeft -= e.detail.dx;
     }

@@ -129,9 +129,32 @@ const googleCivicApi = async (address) => {
   return data;
 };
 
+const resolveImage = (person: {
+  facebook: string | null;
+  twitter: string | null;
+  image: null | string;
+}) => {
+  if (person.image == null && person.twitter) {
+    return `https://res.cloudinary.com/fightforblacklives-com/image/twitter_name/${person.twitter}`;
+  }
+
+  if (person.image == null && person.facebook) {
+    return `https://res.cloudinary.com/fightforblacklives-com/image/facebook/${person.facebook}`;
+  }
+
+  if (person.image == null) {
+    return null;
+  }
+
+  return person.image.startsWith("http://")
+    ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(
+        person.image
+      )}`
+    : person.image;
+};
+
 export const getDataByAddress = async (zip) => {
   const googleCivicData = await googleCivicApi(zip + ", United States");
-  console.log(googleCivicData);
   const addlData = await request(
     `https://d2jm68nhxp4m1b.cloudfront.net/zip-code-bundles/${zip}.jsonp?t=${Date.now()}`
   );
@@ -204,6 +227,8 @@ ${p.address[0].city}, ${p.address[0].state}, ${p.address[0].zip}`
   return {
     city,
     state,
-    people,
+    people: people.map((person) => {
+      return { ...person, image: resolveImage(person) };
+    }),
   };
 };

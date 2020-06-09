@@ -1,21 +1,23 @@
 export default (el) => {
+  const scrollEl = document.documentElement || document.body;
+
   const handleClick = (e) => {
-    e.preventDefault();
+    const aHref = new URL(e.target.href);
 
-    const [pathName, selector] = e.target.href.split("#");
-
-    if (pathName !== window.location.pathname) {
-      window.location.href = pathName + "#" + selector;
+    if (aHref.pathname !== window.location.pathname) {
+      window.location.href = e.target.href;
       return;
     }
 
-    const el = document.querySelector("#" + selector);
+    e.preventDefault();
+
+    const el = document.querySelector(aHref.hash);
     const bodyRect = window.document.body.getBoundingClientRect();
     const elRect = el.getBoundingClientRect();
 
     const scrollPosition = elRect.top - bodyRect.top;
 
-    window.scroll({ top: scrollPosition - 150, behavior: "smooth" });
+    scrollEl.scroll({ top: scrollPosition - 150, behavior: "smooth" });
   };
 
   el.addEventListener("click", handleClick);

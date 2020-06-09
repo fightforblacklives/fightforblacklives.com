@@ -6,6 +6,7 @@
   import scrollLink from "mixins/scrollLink";
   import { staticPath } from "config/static";
   import ScrollOver from "components/ScrollOver";
+  import { onMount } from "svelte";
 
   let zipCode = "";
   let pristine = true;
@@ -18,6 +19,20 @@
       pristine = false;
     }
   };
+
+  onMount(() => {
+    if (window.location.hash) {
+      const el = document.querySelector(window.location.hash);
+      const bodyRect = document.body.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const scrollTop = elRect.y - bodyRect.y - 150;
+
+      (document.documentElement || document.body).scroll({
+        behavior: "smooth",
+        top: scrollTop,
+      });
+    }
+  });
 </script>
 
 <svelte:head>

@@ -1206,6 +1206,10 @@ img {
     padding-top: 0;
   }
 
+  .sm\:pl-3 {
+    padding-left: 0.75rem;
+  }
+
   .sm\:pt-6 {
     padding-top: 1.5rem;
   }

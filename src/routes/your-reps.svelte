@@ -2,6 +2,7 @@
   import { getDataByAddress } from "utils/api";
   import { onMount, tick } from "svelte";
   import { staticPath } from "config/static";
+  import LoadImage from "components/LoadImage";
   import MessagingDropdown from "components/MessagingDropdown";
   import Icon from "components/Icon";
   import RepCardInfo from "components/RepCardInfo";
@@ -11,7 +12,7 @@
     fasPhone,
     facebook,
     fasAngleRight,
-    fasUser
+    fasUser,
   } from "config/icons.ts";
 
   let animationDuration = 250;
@@ -38,35 +39,35 @@
     "Policing for Profit",
     "Invest in Community",
     "Mental Health",
-    "Broken Windows Policing"
+    "Broken Windows Policing",
   ];
 
   let testTweets = [
     {
       id: "test2",
-      text: "Help us write impactful tweets!"
+      text: "Help us write impactful tweets!",
     },
 
     {
       id: "test3",
-      text: "Help us write impactful tweets!"
+      text: "Help us write impactful tweets!",
     },
 
     {
       id: "test4",
-      text: "Help us write impactful tweets!"
+      text: "Help us write impactful tweets!",
     },
 
     {
       id: "test5",
-      text: "Help us write impactful tweets!"
-    }
+      text: "Help us write impactful tweets!",
+    },
   ];
 
-  let tweetTopics = topics.map(topic => {
+  let tweetTopics = topics.map((topic) => {
     return {
       topic: topic,
-      tweets: testTweets
+      tweets: testTweets,
     };
   });
 
@@ -95,17 +96,17 @@
     }
   };
 
-  const getGridColumns = gridEl => {
+  const getGridColumns = (gridEl) => {
     return window.getComputedStyle(gridEl)["grid-template-columns"].split(" ")
       .length;
   };
 
   const getExitTransitionType = (lastPerson, nextPerson) => {
     const lastPos = zipCodeBundle.people.findIndex(
-      person => person.id === lastPerson
+      (person) => person.id === lastPerson
     );
     const nextPos = zipCodeBundle.people.findIndex(
-      person => person.id === nextPerson
+      (person) => person.id === nextPerson
     );
     const columns = getGridColumns(gridEl);
     const lastRow = Math.floor(lastPos / columns);
@@ -119,7 +120,7 @@
       return {
         type: "swap",
         direction: nextPos < lastPos ? -1 : 1,
-        duration: animationDuration
+        duration: animationDuration,
       };
     }
 
@@ -128,10 +129,10 @@
 
   const getTransitionType = (lastPerson, nextPerson) => {
     const lastPos = zipCodeBundle.people.findIndex(
-      person => person.id === lastPerson
+      (person) => person.id === lastPerson
     );
     const nextPos = zipCodeBundle.people.findIndex(
-      person => person.id === nextPerson
+      (person) => person.id === nextPerson
     );
     const columns = getGridColumns(gridEl);
 
@@ -146,7 +147,7 @@
       return {
         type: "swap",
         duration: animationDuration,
-        direction: nextPos < lastPos ? 1 : -1
+        direction: nextPos < lastPos ? 1 : -1,
       };
     }
 
@@ -190,7 +191,7 @@
           pattern={'\\d*'}
           maxlength="5"
           style="max-width: 100px;"
-          on:keydown={e => {
+          on:keydown={(e) => {
             if (e.key === 'Enter') {
               loadNewZip();
             }
@@ -215,7 +216,7 @@
           class="card relative sm:self-start flex flex-col border-b
           border-c-border-3 lg:border-b-0 lg:border-t-0">
           <div
-            on:click={e => selectCard(e, person)}
+            on:click={(e) => selectCard(e, person)}
             style="transition: box-shadow {(animationDuration / 1000).toFixed(4)}s;
             height: {cardWidth}px;"
             class="hidden sm:flex select-none cursor-pointer card-content
@@ -223,12 +224,12 @@
             ">
             <div class="flex flex-1 items-center justify-center">
               {#if person.image}
-                <img
+                <LoadImage
                   style="width: {0.4 * cardWidth}px; height: {0.4 * cardWidth}px"
                   class="card-image object-cover rounded-full mx-auto border-2
                   border-c-border-3"
                   alt="Portrait of {person.name}"
-                  src={person.image.startsWith('http://') ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(person.image)}` : person.image} />
+                  src={person.image} />
               {:else}
                 <div
                   style="width: {0.4 * cardWidth}px; height: {0.4 * cardWidth}px"
@@ -243,15 +244,15 @@
           </div>
 
           <div
-            on:click={e => selectCard(e, person)}
+            on:click={(e) => selectCard(e, person)}
             class="card-content flex flex-col sm:hidden py-5">
             <div class="flex contained items-center">
               {#if person.image}
-                <img
+                <LoadImage
                   class="card-image object-cover rounded-full mx-auto w-20 h-20
                   border-2 border-c-border-3"
                   alt="Portrait of {person.name}"
-                  src={person.image.startsWith('http://') ? `https://external-content.duckduckgo.com/iu/?u=${encodeURIComponent(person.image)}` : person.image} />
+                  src={person.image} />
               {:else}
                 <div
                   class="w-20 h-20 border-2 border-c-border-3 flex flex-col
@@ -277,7 +278,7 @@
             <MessagingDropdown
               transition={person.id === lastPerson ? getExitTransitionType(lastPerson, nextPerson) : getTransitionType(lastPerson, selectedPerson)}
               {lastArrowRect}
-              on:lastRect={e => (lastArrowRect = e.detail)}
+              on:lastRect={(e) => (lastArrowRect = e.detail)}
               exiting={person.id === lastPerson}
               {person}
               tweets={tweetTopics}
