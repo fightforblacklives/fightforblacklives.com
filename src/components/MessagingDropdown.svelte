@@ -191,7 +191,6 @@
             topicActiveButtonRect.left + topicActiveButtonRect.width / 2;
           const destScrollLeft =
             destMiddle - buttonNavScroller.getBoundingClientRect().width / 2;
-          console.log(destMiddle, destScrollLeft);
 
           buttonNavScroller.scroll({
             left: destScrollLeft,
@@ -211,7 +210,6 @@
         topicActiveButtonRect.left + topicActiveButtonRect.width / 2;
       const destScrollLeft =
         destMiddle - buttonNavScroller.getBoundingClientRect().width / 2;
-      console.log(destMiddle, destScrollLeft);
 
       buttonNavScroller.scroll({
         left: destScrollLeft,
