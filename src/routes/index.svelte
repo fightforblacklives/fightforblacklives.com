@@ -231,7 +231,7 @@
   }
 
   .section-header {
-    @apply text-4xl font-semibold text-c-header-1 mb-6 text-center;
+    @apply text-4xl font-semibold text-c-header-1 mb-6;
     text-justify: inter-character;
 
     @screen md {
