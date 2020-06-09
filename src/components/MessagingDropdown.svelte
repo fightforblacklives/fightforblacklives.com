@@ -368,6 +368,9 @@
                     <a
                       class="flex flex-col"
                       target="_blank"
+                      on:click={() => window.gtag('event', 'share', {
+                          method: 'Twitter',
+                        })}
                       href={getTweetLink(buildMessage(tweet))}>
                       <div class="flex p-4">
                         <img
@@ -392,9 +395,15 @@
 
                           <div class="pt-4">
                             <a
-                              href={getTweetLink(person, tweet.text)}
+                              href={getTweetLink(buildMessage(tweet))}
                               target="_blank"
-                              on:click|stopPropagation={() => true}
+                              on:click|stopPropagation={() => window.gtag(
+                                  'event',
+                                  'share',
+                                  {
+                                    method: 'Twitter',
+                                  }
+                                )}
                               class="inline-flex transition-colors items-center
                               font-medium rounded-full text-c-link-2-twitter
                               hover:text-c-link-twitter

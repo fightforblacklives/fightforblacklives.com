@@ -309,7 +309,7 @@
     </ul>
   </div>
 {:else}
-  <div class="flex flex-col">
+  <div class="flex flex-col w-screen">
     <ZipHeader {zipCodeBundle} on:submit={() => loadNewZip()} bind:zipCode />
     {#if loading}
       <div class="contained flex flex-col">
