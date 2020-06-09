@@ -1,6 +1,6 @@
 npm run export &&
 echo "fightforblacklives.com" > __sapper__/export/CNAME &&
-mv __sapper__/export/404/index.html 404.html
+mv __sapper__/export/404/index.html __sapper__/export/404.html
 rm -rf __sapper__/export/404
 rm -rf docs
 mv __sapper__/export/ docs &&
