@@ -192,7 +192,7 @@
   };
 
   let cardWidth;
-  let windowWidth;
+  let windowWidth = window.innerWidth;
   let windowHeight;
 
   $: dropdownSize =

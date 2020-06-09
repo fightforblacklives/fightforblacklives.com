@@ -9,7 +9,7 @@
   let zipFormWidth = 600;
   let zipScrollEffectLength = 200;
   let zipFormScaleDown = 0.2;
-  let windowWidth = 1200;
+  let windowWidth = window.innerWidth;
   let stickyHeight = 100;
 
   $: isMobile = windowWidth < 768;
