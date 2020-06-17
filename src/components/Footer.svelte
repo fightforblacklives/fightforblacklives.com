@@ -11,10 +11,9 @@
   ];
 
   let orgLinks = [
-    { url: "https://www.reclaimtheblock.org", name: "Reclaim the Block" },
     { url: "https://www.joincampaignzero.org/", name: "Campaign Zero " },
     { url: "https://colorofchange.org/", name: "Color of Change" },
-    { url: "https://blacklivesmatter.com/", name: "Black Lives Matter" },
+
     {
       url: "https://minnesotafreedomfund.org/",
       name: "Minnesota Freedom Fund"

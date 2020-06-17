@@ -9,8 +9,8 @@
       image: "color_of_change_logo.png",
       description: [
         "Color Of Change is the nation’s largest online racial justice organization.",
-        "They help people respond effectively to injustice in the world around us. As a national online force driven by 1.7 million members, they move decision-makers in corporations and government to create a more human and less hostile world for Black people in America.",
-      ],
+        "They help people respond effectively to injustice in the world around us. As a national online force driven by 1.7 million members, they move decision-makers in corporations and government to create a more human and less hostile world for Black people in America."
+      ]
     },
 
     {
@@ -18,17 +18,8 @@
       image: "campaignzero_logo.png",
       description: [
         "Over 1,000 people are killed by police every year in America.",
-        "Campaign Zero calls on local, state, and federal lawmakers to take immediate action to adopt data-driven policy solutions to end this violence and hold police accountable.",
-      ],
-    },
-
-    {
-      id: "Black Lives Matter",
-      image: "blacklivesmatter_logo.png",
-      description: [
-        "Black Lives Matter Foundation, Inc is a global organization in the US, UK, and Canada, whose mission is to eradicate white supremacy and build local power to intervene in violence inflicted on Black communities by the state and vigilantes.",
-        "By combating and countering acts of violence, creating space for Black imagination and innovation, and centering Black joy, we are winning immediate improvements in our lives.",
-      ],
+        "Campaign Zero calls on local, state, and federal lawmakers to take immediate action to adopt data-driven policy solutions to end this violence and hold police accountable."
+      ]
     },
 
     {
@@ -36,8 +27,8 @@
       image: "MinnesotaFreedomFund_logo.png",
       description: [
         "An organization that helps pay jail bonds for those who cannot afford to fight discriminatory and coercive jailing in Minnesota, which has been the epicenter of protests after Floyd's death in the state.",
-        "Every dollar of financial donations to Minnesota Freedom Fund helps us help free people",
-      ],
+        "Every dollar of financial donations to Minnesota Freedom Fund helps us help free people"
+      ]
     },
 
     {
@@ -45,8 +36,8 @@
       image: "National_Lawyers_Guild_Mass_Defense_Fund.png",
       description: [
         "The NLG Mass Defense Program is currently working across the country to protect the rights of those protesting the police killing of George Floyd and the broader pattern of ongoing racialized police violence.",
-        "Their chapters and members are on the ground in dozens of cities right now supporting the right to dissent. Your donation will help provide legal support for political activists and movements for racial and economic justice.",
-      ],
+        "Their chapters and members are on the ground in dozens of cities right now supporting the right to dissent. Your donation will help provide legal support for political activists and movements for racial and economic justice."
+      ]
     },
 
     {
@@ -54,8 +45,8 @@
       image: "cr-logo-transparent.png",
       description: [
         "Critical Resistance seeks to build an international movement to end the Prison Industrial Complex by challenging the belief that caging and controlling people makes us safe.",
-        "They believe that basic necessities such as food, shelter, and freedom are what really make our communities secure. As such, their work is part of global struggles against inequality and powerlessness.",
-      ],
+        "They believe that basic necessities such as food, shelter, and freedom are what really make our communities secure. As such, their work is part of global struggles against inequality and powerlessness."
+      ]
     },
 
     {
@@ -63,18 +54,9 @@
       image: "BLACK-VISIONS-COLLECTIVE-LOGO.png",
       description: [
         "Black Visions Collective envisions a world in which ALL Black Lives Matter.",
-        "They use the guidance and brilliance of our ancestors as well as the teachings of our own experiences to pursue our commitment to dismantling systems of oppression and violence. They are determined in our pursuit of dignity and equity for all.",
-      ],
-    },
-
-    {
-      id: "Reclaim the Block",
-      image: "reclaimtheblock.png",
-      description: [
-        "Reclaim the Block organizes around policies that strengthen community-led safety initiatives and reduce reliance on police departments.",
-        "They do not believe that increased regulation of or public engagement with the police will lead to safer communities, as community testimony and documented police conduct suggest otherwise.",
-      ],
-    },
+        "They use the guidance and brilliance of our ancestors as well as the teachings of our own experiences to pursue our commitment to dismantling systems of oppression and violence. They are determined in our pursuit of dignity and equity for all."
+      ]
+    }
   ];
 
   let currentSlide = slides[0].id;
