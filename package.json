@@ -47,7 +47,7 @@
     "precss": "^4.0.0",
     "sapper": "^0.27.0",
     "smoothscroll-polyfill": "^0.4.4",
-    "svelte": "^3.0.0",
+    "svelte": "^3.49.0",
     "svelte-loader": "^2.9.0",
     "svelte-loader-hot": "^0.3.0",
     "svelte-preprocess-postcss": "^1.1.1",
